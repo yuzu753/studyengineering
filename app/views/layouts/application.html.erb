@@ -10,6 +10,52 @@
   </head>
 
   <body>
+    <header class="navbar-inverse" style="background-color:#00AA00;">
+      <% if user_signed_in? %>
+        <div class="container" style="font-family: HGP行書体;">
+          <%= link_to "Study Engieering", users_path(current_user.id), id: "logo"%>
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home" %></li>
+              <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user" %></li>
+              <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book" %></li>
+              <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out" %></li>
+            </ul>
+          </nav>
+        </div>
+      <% else %>
+        <div class="container" style="font-family: HGP行書体;">
+          <div class="cdonline"><%= link_to "Study Engieering", root_path, id: "logo"%>
+            <nav>
+              <ul class="nav navbar-nav navbar-right nav-items">
+                <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>
+                <li><%= link_to " 新規登録", new_user_registration_path, class: "glyphicon glyphicon-edit under_bar", :style => "color:#fff;" %></li>
+                <li><%= link_to " ログイン", new_user_session_path, class: "glyphicon glyphicon-log-in under_bar", :style => "color:#fff;" %></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      <% end %>
+    </header>
+
     <%= yield %>
+
+    <footer class="navbar-inverse" style="background-color:#00AA00;">
+      <div class="container" style="font-family: HGP行書体;">
+        <nav>
+          <ul class="nav navbar-nav navbar-center">
+            <li class="list-inline-item"><%= link_to "StudyEngieeringトップページ", root_path, class: "under_bar", :style => "color:#fff;" %></li>
+            <li class="list-inline-item"><a style = "color:#fff;">|</a></li>
+            <li class="list-inline-item"><%= link_to "プライバシーポリシー", "#", class: "under_bar", :style => "color:#fff;" %></li>
+            <li class="list-inline-item"><a style = "color:#fff;">|</a></li>
+            <li class="list-inline-item"><%= link_to "お問い合わせ", "#", class: "under_bar", :style => "color:#fff;" %></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-center">
+            <li class="list-inline-item"><a style = "color:#fff; font-size: 12px;">© 2019 Copyright: Study Engieering</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
   </body>
 </html>
