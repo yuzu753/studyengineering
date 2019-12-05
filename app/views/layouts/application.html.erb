@@ -13,13 +13,13 @@
     <header class="navbar-inverse" style="background-color:#00AA00;">
       <% if user_signed_in? %>
         <div class="container" style="font-family: HGP行書体;">
-          <%= link_to "Study Engieering", users_path(current_user.id), id: "logo"%>
+          <%= link_to "Study Engieering", user_path(current_user.id), id: "logo"%>
           <nav>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home" %></li>
-              <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user" %></li>
-              <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book" %></li>
-              <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out" %></li>
+              <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out under_bar", :style => "color:#fff;" %></li>
             </ul>
           </nav>
         </div>
