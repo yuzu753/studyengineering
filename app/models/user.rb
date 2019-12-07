@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def havebook(book)
     self.books.find_by(book_code: book.book_code)
   end
+
+  def already_recommended?(book)
+    self.recommendeds.exists?(book_id: book.id)
+  end
 end
