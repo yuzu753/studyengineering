@@ -1,14 +1,12 @@
 class BookshelvesController < ApplicationController
 
 	def create
-	  book = Book.find_or_initialize_by(book_code: params[:book_code])
-
+	  book = Book.find_or_initialize_by(book_code: book_params[:book_code])
 	  if book.new_record?
-	    results = RakutenWebService::Books::Book.search(isbn: params[:book_code])
+	    results = RakutenWebService::Books::Book.search(isbn: book_params[:book_code])
 	    book = Book.new(read(results.first))
 	    book.save
 	  end
-
 	  bookshelf = Bookshelf.new
 	  bookshelf.user_id = current_user.id
 	  bookshelf.book_id = book.id
@@ -42,6 +40,10 @@ class BookshelvesController < ApplicationController
 
 	def bookshelf_update_params
 		params.require(:bookshelf).permit(:status)
+	end
+
+	def book_params
+		params.require(:bookshelf).permit(:book_code)
 	end
 
 end

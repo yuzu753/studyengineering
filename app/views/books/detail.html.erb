@@ -5,9 +5,9 @@
         <div class= "bookshelf-buttom">
         <% if user_signed_in? %>
           <% unless current_user.havebook(@book) %>
-            <%= form_tag(bookshelves_path) do %>
-              <%= hidden_field_tag :book_code, @book.book_code %>
-                <%= submit_tag "本棚に加える", class:"btn btn-primary btn-block" %>
+            <%= form_with(model: @bookshelf, url: bookshelves_path) do |f| %>
+            <%= f.hidden_field :book_code, value: @book.book_code %>
+            <%= f.submit "本棚に加える", class:"btn btn-primary btn-block" %>
             <% end %>
           <% end %>
         <% end %>

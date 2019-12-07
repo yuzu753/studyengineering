@@ -15,8 +15,8 @@ class BooksController < ApplicationController
   	  results = RakutenWebService::Books::Book.search({
           isbn: params[:book_code]
         })
-        @book = Book.new(read(results.first))
-        @bookshelf = Bookshelf.new
+      @book = Book.new(read(results.first))
+      @bookshelf = @book.bookshelves.build
   	end
 
 end
