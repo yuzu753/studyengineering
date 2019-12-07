@@ -1,0 +1,48 @@
+<div class="user-show container">
+  <h3>興味のある本</h3>
+    <% @interest_books.each do |b| %>
+      <div class="col-sm-2">
+        <ul class="usershow-book list-group">
+          <li class="bookimage list-group-book">
+            <img src="<%= b.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+           </li>
+           <%=form_with(model: b, url:bookshelf_path(b.id)) do |f| %>
+              <li class="status list-group-item"><%= f.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
+              <%= f.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
+           <% end %>
+           <%= link_to "削除する", bookshelf_path(b.id), method: :delete, data: {confirm: '本棚から取り除きますか？'}, :class =>"btn btn-danger btn-block" %>
+        </ul>
+      </div>
+    <% end %>
+</div>
+<div class="user-show container">
+  <h3>読書中の本</h3>
+    <% @reading_books.each do |bo| %>
+      <div class="col-sm-2">
+        <ul class="usershow-book list-group">
+          <li class="bookimage list-group-book">
+            <img src="<%= bo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+          </li>
+           <%=form_with(model: bo, url:bookshelf_path(bo.id)) do |fo| %>
+              <li class="status list-group-item"><%= fo.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
+              <%= fo.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
+           <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="user-show container">
+  <h3>学習済みの本</h3>
+    <% @read_books.each do |boo| %>
+      <div class="col-sm-2">
+        <ul class="usershow-book list-group">
+          <li class="bookimage list-group-book">
+            <img src="<%= boo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+

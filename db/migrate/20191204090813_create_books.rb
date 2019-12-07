@@ -4,13 +4,18 @@ class CreateBooks < ActiveRecord::Migration[5.2]
 
       t.timestamps
 
-      t.integer :user_id
       t.string :title
-      t.string :isbn
+      t.string :url
+      t.string :book_code
       t.string :sales_date
+      t.string :price
+      t.string :author
+      t.string :caption
+      t.string :review_average
+      t.string :review_count
       t.string :small_image_url
       t.string :medium_image_url
-      t.integer :status
+      t.string :large_image_url
 
     end
   end

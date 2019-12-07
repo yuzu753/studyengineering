@@ -7,7 +7,7 @@ class CreateTodolists < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.string :body
       t.datetime :deadline
-      t.integer :status
+      t.integer :status, default: 0
     end
   end
 end

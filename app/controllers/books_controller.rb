@@ -1,20 +1,22 @@
 class BooksController < ApplicationController
 
-	def search
-	end
+    def search
+        @books = []
+        @title = params[:title]
+        if @title.present?
+          @books = search_items(@title)
+        end
+    end
 
-	def result
-	end
+  	def result
+  	end
 
-	def show
-	end
+  	def detail
+  	  results = RakutenWebService::Books::Book.search({
+          isbn: params[:book_code]
+        })
+        @book = Book.new(read(results.first))
+        @bookshelf = Bookshelf.new
+  	end
 
-	def create
-	end
-
-	def update
-	end
-
-	def destroy
-	end
 end

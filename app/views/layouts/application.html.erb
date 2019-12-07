@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>Study Engieering</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -19,7 +19,7 @@
               <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>
-              <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out under_bar", :style => "color:#fff;" %></li>
             </ul>
           </nav>
         </div>
