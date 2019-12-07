@@ -10,18 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_105545) do
+ActiveRecord::Schema.define(version: 2019_12_06_021239) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.string "title"
-    t.string "isbn"
+    t.string "url"
+    t.string "book_code"
     t.string "sales_date"
+    t.string "price"
+    t.string "author"
+    t.string "caption"
+    t.string "review_average"
+    t.string "review_count"
     t.string "small_image_url"
     t.string "medium_image_url"
-    t.integer "status"
+    t.string "large_image_url"
+  end
+
+  create_table "bookshelves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "book_id"
+    t.integer "status", default: 0
   end
 
   create_table "recommendeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,6 +49,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_105545) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "title"
+    t.string "body"
     t.decimal "studytime", precision: 10
     t.decimal "until_today_studytime", precision: 10
   end
@@ -46,7 +60,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_105545) do
     t.integer "user_id"
     t.string "body"
     t.datetime "deadline"
-    t.integer "status"
+    t.integer "status", default: 0
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

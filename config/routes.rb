@@ -8,12 +8,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy]
 
-  resources :books, { only: [:show, :create, :update, :destroy] } do
+  resources :books, { only: [:create] } do
   	collection do
   		get :search
   		get :result
+      get :detail
   	end
   end
+
+  resources :bookshelves, only: [:create, :update, :destroy]
 
   resources :recommendeds, only: [:create, :destroy]
 
