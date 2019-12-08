@@ -1,0 +1,16 @@
+<div class="todo-index contaiber">
+  <div class="row">
+  	<div class="col-lg-12">
+  	  <h3>リストの編集</h3>
+      <%= form_with(model: @todolist, url: todolist_path(@todolist), local: true) do |t| %>
+        <label class="edit-todo-body" for="">やる事</label>
+        <%= t.text_area :body, class: 'form-control', style: "height: 100px;" %>
+        <label class="edit-todo-deadtime" for="">目標期限</label><br>
+        <%= t.date_field :deadline, min: Date.today %>
+        <div class="edit-todo-create">
+          <%= t.submit '編集を確定する', class: "btn btn-warning", style: "width: 150px;" %>
+        </div>
+      <% end %>
+  	</div>
+  </div>
+</div>

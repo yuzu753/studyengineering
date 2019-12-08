@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "body"
-    t.datetime "deadline"
+    t.date "deadline"
     t.integer "status", default: 0
   end
 

@@ -1,0 +1,62 @@
+<div class="todo-index contaiber">
+  <div class="row">
+  	<div class="col-lg-12">
+  	  <h3>ToDoの追加</h3>
+      <%= form_with(model: @todolist, url: todolists_path, local: true) do |t| %>
+        <label class="new-todo-body" for="">やる事</label>
+        <%= t.text_area :body, class: 'form-control', style: "height: 100px;" %>
+        <label class="new-todo-deadtime" for="">目標期限</label><br>
+         <%= t.date_field :deadline, min: Date.today, max: Date.today+100 %>
+        <div class="new-todo-create"><%= t.submit 'やる事追加', class: "btn btn-warning", style: "width: 150px;" %></div>
+      <% end %>
+  	</div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+     <h3>ToDoList一覧</h3>
+	  <table class="table">
+	    <thead></thead>
+		<tbody>
+		  <% @todolists.each do |list| %>
+		    <tr>
+			  <% if list.status == "challenge" %>
+			    <th>
+			      <h4>
+			        <%= link_to edit_todolist_path(list.id), :style =>"color:red;" do %>
+			          TODO：<%= list.body %>
+			        <% end %>
+			      </h4>
+			    </th>
+			    <th>
+			      <h4>
+			      	<%= link_to edit_todolist_path(list.id), :style =>"color:red;" do %>
+			      	  期限まで後<%= current_user.ckeck_date(list) %>日
+			      	<% end %>
+			      </h4>
+			    </th>
+			    <th>
+                  <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
+			    </th>
+	            <th>
+	              <%= link_to "削除", todolist_path(list.id), method: :delete, data: {confirm: 'Todoリストから削除しますか？'}, :class =>"btn btn-danger" %>
+	            </th>
+			  <% elsif list.status == "complete" %>
+			    <th><h4>TODO：<%= list.body %></h4></th>
+			    <th><h4>達成</h4></th>
+			  <% elsif list.status == "unachieved" %>
+			    <th><h4>TODO：<%= list.body %></h4></th>
+			    <th>未達</th>
+	          <% else %>
+	          <% end %>
+			</tr>
+		  <% end %>
+		</tbody>
+	  </table>
+	  <div class="page_center">
+	    <%= paginate @todolists %>
+	  </div>
+	</div>
+  </div>
+</div>
+
+

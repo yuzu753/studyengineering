@@ -6,7 +6,7 @@
           <li class="bookimage list-group-book">
             <img src="<%= b.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
           </li>
-          <%= form_with(model: b, url:bookshelf_path(b.id)) do |f| %>
+          <%= form_with(model: b, url: bookshelf_path(b.id), local: true) do |f| %>
             <li class="status list-group-item"><%= f.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
             <%= f.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
           <% end %>
@@ -23,7 +23,7 @@
           <li class="bookimage list-group-book">
             <img src="<%= bo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
           </li>
-           <%= form_with(model: bo, url:bookshelf_path(bo.id)) do |fo| %>
+           <%= form_with(model: bo, url: bookshelf_path(bo.id), local: true) do |fo| %>
               <li class="status list-group-item"><%= fo.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
               <%= fo.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
            <% end %>

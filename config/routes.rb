@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
   resources :recommendeds, only: [:create, :destroy]
 
-  resources :todolists, only: [:index, :edit, :create, :update]
+  resources :todolists, only: [:index, :edit, :create, :update, :destroy] do
+    patch :congratulations
+  end
 
   resources :records, only: [:index, :edit, :create, :update]
 
