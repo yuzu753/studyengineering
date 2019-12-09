@@ -1,5 +1,14 @@
 class Todolist < ApplicationRecord
 	belongs_to :user
 
-	enum status: { 挑戦中: 0,達成: 1,未達: 2 }
+	enum status: { challenge: 0, complete: 1, unachieved: 2 }
+
+	validates :status, inclusion: { in: Todolist.statuses.keys }
+
+	def congratulations!
+      if challenge?
+        complete!
+      end
+    end
+
 end

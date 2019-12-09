@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         title: title,
         booksGenreId: '001005',
         sort: 'sales',
-        hits: '20',
+        hits: '24',
       })
 
       results.each do |result|
@@ -70,3 +70,9 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
 end
+
+
+
+
+
+

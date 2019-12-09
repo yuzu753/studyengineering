@@ -5,16 +5,16 @@
         <div class="col-md-3 col-sm-4 col-xs-12">
           <div class="panel panel-default">
             <div class="panel-heading text-center">
-              <%=link_to detail_books_path(book_code: book["book_code"]) do %>
-                <img src="<%= book.medium_image_url %>" alt="本の表紙" width="170px" height="220px">
+              <%=link_to detail_books_path(book_code: book.book_code) do %>
+                <img src="<%= book.medium_image_url %>" alt="本の表紙" width="170px" height="230px">
               <% end %>
             </div>
             <div class= "bookshelf-buttom">
               <% if user_signed_in? %>
                 <% unless current_user.havebook(book) %>
-                    <%= form_tag(bookshelves_path) do %>
-                      <%= hidden_field_tag :book_code, book.book_code %>
-                      <%= submit_tag "本棚に加える", class:"btn btn-primary" %>
+                    <%= form_with(url: bookshelves_path, local: true) do |f| %>
+                      <%= f.hidden_field :book_code, value: book.book_code %>
+                      <%= f.submit "本棚に加える", class:"btn btn-primary" %>
                     <% end %>
                 <% else %>
                   <input type="button" onclick="location.href='<%= book.url %>'"value="楽天で確認する", class= "btn btn-danger">

@@ -1,0 +1,22 @@
+<div class="user-edit contaiber">
+  <div class="row">
+  	<div class="col-sm-8">
+  	  <h3>ユーザー登録編集</h3>
+      <%= form_with(model: @user, url: user_path(@user.id), method: :PATCH, local: true) do |u| %>
+        <label class="edit-user-form" for="">名前</label>
+        <%= u.text_field :name, class: 'form-control', placeholder: "名前を入力" %>
+        <label class="edit-user-form" for="">メールアドレス</label>
+        <%= u.text_field :email, class: 'form-control', placeholder: "メールアドレスを入力" %>
+        <label class="edit-user-form" for="">GitHub_ULR</label>
+        <%= u.text_field :github_url, class: 'form-control', placeholder: "GitHubのマイページURLを入力" %>
+        <label class="edit-user-form" for="">Twitter_URL</label>
+        <%= u.text_field :twitter_url, class: 'form-control', placeholder: "TwitterのマイページURLを入力" %>
+        <label class="edit-user-form" for="">Wantedly_URL</label>
+        <%= u.text_field :wantedly_url, class: 'form-control', placeholder: "WantedlyのマイページURLを入力" %>
+        <div class="edit-todo-create">
+          <%= u.submit '編集を確定する', class: "btn btn-success", style: "width: 150px;" %>
+        </div>
+      <% end %>
+  	</div>
+  </div>
+</div>

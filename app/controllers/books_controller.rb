@@ -1,11 +1,11 @@
 class BooksController < ApplicationController
 
     def search
-        @books = []
-        @title = params[:title]
-        if @title.present?
+      @books = []
+      @title = booktitle_params[:title]
+      if @title.present?
           @books = search_items(@title)
-        end
+      end
     end
 
   	def result
@@ -13,10 +13,19 @@ class BooksController < ApplicationController
 
   	def detail
   	  results = RakutenWebService::Books::Book.search({
-          isbn: params[:book_code]
-        })
-        @book = Book.new(read(results.first))
-        @bookshelf = Bookshelf.new
+        isbn: bookcode_params[:book_code]
+      })
+      @book = Book.new(read(results.first))
   	end
+
+    private
+
+    def booktitle_params
+      params.permit(:title)
+    end
+
+    def bookcode_params
+      params.permit(:book_code)
+    end
 
 end

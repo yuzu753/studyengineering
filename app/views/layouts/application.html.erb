@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   </head>
 
   <body>
@@ -16,6 +17,7 @@
           <%= link_to "Study Engieering", user_path(current_user.id), id: "logo"%>
           <nav>
             <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "ユーザー情報の編集", edit_user_path(current_user.id), class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>

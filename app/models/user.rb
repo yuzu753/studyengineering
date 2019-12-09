@@ -13,4 +13,14 @@ class User < ApplicationRecord
   def havebook(book)
     self.books.find_by(book_code: book.book_code)
   end
+
+  def already_recommended?(book)
+    self.recommendeds.exists?(book_id: book.id)
+  end
+
+  def ckeck_date(todolist)
+    limit_time = self.todolists.find_by(id: todolist.id)
+    (limit_time.deadline - Date.today).to_i
+  end
+
 end
