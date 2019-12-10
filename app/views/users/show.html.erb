@@ -5,32 +5,48 @@
       <table class="table">
       <thead></thead>
         <tbody>
-          <% @todolists.each do |list| %>
-            <tr>
-              <% if list.status == "challenge" %>
-                <th>
-                  ToDo：<%= list.body %>
-                </th>
-                <th>
-                  期限まで後<%= current_user.ckeck_date(list) %>日
-                </th>
-                <th>
-                  <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
-                </th>
-              <% else %>
-              <% end %>
-            </tr>
+          <% if current_user.todolists.present? %>
+            <% @todolists.each do |list| %>
+              <tr>
+                <% if list.status == "challenge" %>
+                  <th>
+                    ToDo：<%= list.body %>
+                  </th>
+                  <th>
+                    期限まで後<%= current_user.ckeck_date(list) %>日
+                  </th>
+                  <th>
+                    <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
+                  </th>
+                <% else %>
+                <% end %>
+              </tr>
+            <% end %>
+          <% else %>
+            <h4>特に無し</h4>
           <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-6">
+      <h3>学習時間</h3>
+      <% if @studychart.present? %>
+        <%= line_chart @studychart %>
+      <% else %>
+        <h4>学習時間を記録しよう！</h4>
+      <% end %>
     </div>
   </div>
 </div>
 <div class="user-show container">
   <div class="row">
     <div class="col-md-6">
-     <h3>ToDo達成率</h3>
-      <%= pie_chart @todochart %>
+      <h3>ToDo達成率</h3>
+      <% if @completes.present? || @unachieved.present? %>
+        <%= pie_chart @todochart %>
+      <% else %>
+        <h4>ToDo達成を報告しよう！</h4>
+      <% end %>
     </div>
     <div class="col-md-6">
       <h3>読書中の本</h3>

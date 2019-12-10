@@ -15,15 +15,16 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "font-awesome";
 
  #logo {
   float: left;
   margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 1.9em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 12px;
   font-weight: bold;
 }
 
@@ -41,7 +42,7 @@
 
 .under_bar::before,
 .under_bar::after {
-	  border-bottom: solid 2px #800000;
+	  border-bottom: solid 2px #FFF;
 	  bottom: 0;
 	  content: "";
 	  display: block;
@@ -70,6 +71,17 @@ ul {
   padding-bottom: 30px;
 }
 
+.icon-wantedly {
+  color: #0FF;
+}
+
+.icon-github {
+  color: #0FF;
+}
+
+.icon-twitter {
+  color: #0FF;
+}
 
 
 

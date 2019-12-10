@@ -10,7 +10,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :sales_date
       t.string :price
       t.string :author
-      t.string :caption
+      t.text :caption
       t.string :review_average
       t.string :review_count
       t.string :small_image_url

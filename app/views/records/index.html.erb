@@ -1,0 +1,65 @@
+<div class="record-index contaiber">
+  <div class="row">
+  	<div class="col-lg-12">
+  	  <h3>本日の進捗</h3>
+      <%= form_with(model: @record, url: records_path, local: true) do |r| %>
+        <label class="new-record-title" for="">学習項目</label>
+        <%= r.text_field :title, class: 'form-control' %>
+        <label class="new-record-body" for="">進捗内容</label>
+        <%= r.text_area :body, class: 'form-control', style: "height: 100px;" %>
+        <label class="new-record-studytime sr-only" for="">学習時間</label><br>
+        <div class="input-group">
+          <span class="input-group-addon">学習時間：</span>
+          <%= r.number_field :studytime, min: 0, max: 24, class: 'form-control', :step=>"0.1" %>
+          <span class="input-group-addon">時間</span>
+        </div>
+        <div class="new-todo-create"><%= r.submit '学習内容を報告する', class: "btn btn-warning", style: "width: 150px;" %></div>
+      <% end %>
+  	</div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>成果報告一覧</h3>
+      <table class="table">
+        <thead></thead>
+        <tbody>
+          <% @records.each do |re| %>
+            <tr>
+              <th>
+                <h5>
+                  <%= link_to edit_record_path(re.id) do %>
+                    項目：<%= re.title %>
+                  <% end %>
+                </h5>
+              </th>
+              <th>
+                <h5>
+                  <%= link_to edit_record_path(re.id) do %>
+                    内容：<%= re.body %>
+                  <% end %>
+                </h5>
+              </th>
+              <th>
+                <h5>
+                  <%= link_to edit_record_path(re.id) do %>
+                    本日の学習時間：<%= re.studytime %>時間
+                  <% end %>
+                </h5>
+              </th>
+              <th>
+                <h5>
+                  <%= link_to edit_record_path(re.id) do %>
+                    総学習時間：<%= re.until_today_studytime %>時間
+                  <% end %>
+                </h5>
+              </th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="page_center">
+        <%= paginate @records %>
+      </div>
+    </div>
+  </div>
+</div>

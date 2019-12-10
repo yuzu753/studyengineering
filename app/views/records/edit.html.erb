@@ -1,0 +1,20 @@
+<div class="record-index contaiber">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>進捗の編集</h3>
+      <%= form_with(model: @record, url: record_path(@record), local: true) do |r| %>
+        <label class="new-record-title" for="">学習項目</label>
+        <%= r.text_field :title, class: 'form-control' %>
+        <label class="new-record-body" for="">進捗内容</label>
+        <%= r.text_area :body, class: 'form-control', style: "height: 100px;" %>
+        <label class="new-record-studytime sr-only" for="">学習時間</label><br>
+        <div class="input-group">
+          <span class="input-group-addon">学習時間：</span>
+          <%= r.number_field :studytime, min: 0, max: 24, class: 'form-control', :step=>"0.1" %>
+          <span class="input-group-addon">時間</span>
+        </div>
+        <div class="new-todo-create"><%= r.submit '変更を確定する', class: "btn btn-warning", style: "width: 150px;" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>

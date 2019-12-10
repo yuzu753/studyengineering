@@ -7,14 +7,9 @@
         <%= u.text_field :name, class: 'form-control', placeholder: "名前を入力" %>
         <label class="edit-user-form" for="">メールアドレス</label>
         <%= u.text_field :email, class: 'form-control', placeholder: "メールアドレスを入力" %>
-        <label class="edit-user-form" for="">GitHub_ULR</label>
-        <%= u.text_field :github_url, class: 'form-control', placeholder: "GitHubのマイページURLを入力" %>
-        <label class="edit-user-form" for="">Twitter_URL</label>
-        <%= u.text_field :twitter_url, class: 'form-control', placeholder: "TwitterのマイページURLを入力" %>
-        <label class="edit-user-form" for="">Wantedly_URL</label>
-        <%= u.text_field :wantedly_url, class: 'form-control', placeholder: "WantedlyのマイページURLを入力" %>
         <div class="edit-todo-create">
           <%= u.submit '編集を確定する', class: "btn btn-success", style: "width: 150px;" %>
+          <%= link_to "退会する", user_path(@user.id), class:"btn btn-danger destroy pull-right", method: :delete, "data-confirm" => "本当に削除しますか？？" %>
         </div>
       <% end %>
   	</div>

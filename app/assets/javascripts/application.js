@@ -19,3 +19,4 @@
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
+//= require data-confirm-modal
