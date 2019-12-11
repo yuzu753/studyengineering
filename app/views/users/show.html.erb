@@ -2,34 +2,52 @@
   <div class="row">
     <div class="col-md-6">
      <h3>ToDoList一覧</h3>
-      <table class="table">
-      <thead></thead>
-        <tbody>
+      <table class="table table-hover" style="table-layout:fixed;width:100%;">
+        <colgroup>
+          <col style="width:72%;">
+          <col style="width:13%;">
+          <col style="width:15%;">
+        </colgroup>
+      <thead>
+        <tr>
+          <th>内容</th>
+          <th>期限</th>
+          <th>報告</th>
+        </tr>
+      </thead>
+        <tbody style="word-wrap:break-word;">
           <% if current_user.todolists.present? %>
             <% @todolists.each do |list| %>
               <tr>
-                <% if list.status == "challenge" %>
                   <th>
-                    ToDo：<%= list.body %>
+                    <%= list.body %>
                   </th>
                   <th>
-                    期限まで後<%= current_user.ckeck_date(list) %>日
+                    <%= current_user.ckeck_date(list) %>日
                   </th>
                   <th>
-                    <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
+                    <%= link_to '達成', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
                   </th>
-                <% else %>
-                <% end %>
               </tr>
             <% end %>
           <% else %>
-            <h4>特に無し</h4>
+            <h4>Listにデータがありません</h4>
           <% end %>
         </tbody>
       </table>
     </div>
     <div class="col-md-6">
       <h3>学習時間</h3>
+      <div class="form-group">
+        <%= form_with(url: user_path(current_user.id), method: :get, local: true, class: "form-inline") do |f| %>
+          <label class="term_button"><%= radio_button_tag( "study_term", 1 ) %>１週間</label>
+          <label class="term_button"><%= radio_button_tag( "study_term", 2 ) %>１ヶ月</label>
+          <label class="term_button"><%= radio_button_tag( "study_term", 3 ) %>３ヶ月</label>
+          <label class="term_button"><%= radio_button_tag( "study_term", 4 ) %>１年間</label>
+          <label class="term_button"><%= radio_button_tag( "study_term", 5 ) %>全期間</label>
+          <%= f.submit "期間を変更する", class: "btn btn-primary btn-mg" %>
+        <% end %>
+      </div>
       <% if @studychart.present? %>
         <%= line_chart @studychart %>
       <% else %>

@@ -6,7 +6,7 @@ class CreateRecords < ActiveRecord::Migration[5.2]
 
       t.integer :user_id
       t.string :title
-      t.string :body
+      t.text :body
       t.decimal :studytime
       t.decimal :until_today_studytime
     end

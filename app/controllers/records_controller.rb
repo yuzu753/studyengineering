@@ -1,24 +1,33 @@
 class RecordsController < ApplicationController
 
 	def index
-	  @records = current_user.records.all.page(params[:page]).per(10)
+	  @records = current_user.records.order("id DESC").page(params[:page]).per(10)
 	  @record = Record.new
 	end
 
 	def edit
-	  @record = current_user.records.find(params[:id])
+	  @record = Record.find(params[:id])
+	  if @record.user_id != current_user.id
+      	redirect_to root_path
+      end
 	end
 
 	def create
 	  record = Record.new(record_params)
       record.user_id = current_user.id
-      totalstudytime = current_user.records.sum(:studytime) + record.studytime
-      record.until_today_studytime = totalstudytime
-      if record.save
-        flash[:add_record] = "本日の進捗を追加しました"
-        redirect_to records_path
+      if  current_user.records.last.created_at.strftime("%Y-%m-%d") != Date.today.strftime("%Y-%m-%d")
+        if  record.save
+      	  totalstudytime = current_user.records.sum(:studytime) + record.studytime
+          record.until_today_studytime = totalstudytime
+          record.save
+          flash[:add_record] = "本日の進捗を追加しました"
+          redirect_to records_path
+        else
+          flash[:miss_add_record] = "やる事と期限を入力してください"
+          redirect_to records_path
+        end
       else
-        flash[:miss_add_record] = "やる事と期限を入力してください"
+      	flash[:miss_sameday_record] = "同じ日に学習記録があります"
         redirect_to records_path
       end
 	end

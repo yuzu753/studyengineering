@@ -3,6 +3,7 @@ class Todolist < ApplicationRecord
 
 	enum status: { challenge: 0, complete: 1, unachieved: 2 }
 
+	validates :user_id, :body, :deadline, :status, presence: true
 	validates :status, inclusion: { in: Todolist.statuses.keys }
 
 	def congratulations!

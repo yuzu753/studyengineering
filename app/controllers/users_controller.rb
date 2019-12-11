@@ -1,24 +1,41 @@
 class UsersController < ApplicationController
 
 	def show
-	  #TODOリスト表示用のインスタンス変数 && 未達のステータス更新用の処理
+	  @user = User.find(params[:id])
+	  if @user.id != current_user.id
+        redirect_to user_path(current_user.id)
+      end
+	  #TODOリスト表示用のインスタンス変数 && 未達ステータス更新用の処理
 	  if current_user.todolists.present?
-	    @todolists = current_user.todolists.find(Todolist.order(id: :desc).limit(7).pluck(:id))
-	    @todolists.each do |todo|
-	  	  if current_user.ckeck_date(todo) < 0 && todo.status == "challenge"
-	  		todo.status = 2
-	  		todo.save
-	  	  end
-	    end
+	  	todo_challenge = current_user.todolists.where(status: 0).order(:deadline)
+	    @todolists = todo_challenge.limit(5)
 	  end
 
       #学習時間のグラフ用のインスタンス変数
-	  @studytimes = current_user.records.all
-	  @studychart = []
-	  @studytimes.each do |s|
-	  	@studychart << [s.created_at, s.until_today_studytime]
+      if  params[:study_term].to_i == 1
+      	@studytimes = current_user.records.where("created_at > :date", date: Date.today - 7)
+
+      elsif  params[:study_term].to_i == 2
+      	@studytimes = current_user.records.where("created_at > :date", date: Date.today - 30)
+
+      elsif  params[:study_term].to_i == 3
+      	@studytimes = current_user.records.where("created_at > :date", date: Date.today - 90)
+
+      elsif  params[:study_term].to_i == 4
+      	@studytimes = current_user.records.where("created_at > :date", date: Date.today - 365)
+
+      elsif  params[:study_term].to_i == 5
+      	@studytimes = current_user.records.all
+
+      else
+	    @studytimes = current_user.records.all
+
 	  end
 
+	  @studychart = []
+	  @studytimes.each do |s|
+	    @studychart << [s.created_at.strftime("%Y-%m-%d"), s.until_today_studytime]
+	  end
 
       #TODOの達成率のチャート用インスタンス変数
 	  @completes = current_user.todolists.where(status: 1)
@@ -35,7 +52,10 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-	  @user = current_user
+	  @user = User.find(params[:id])
+      if @user.id != current_user.id
+        redirect_to root_path
+      end
 	end
 
 	def update

@@ -1,51 +1,75 @@
 <div class="todo-index contaiber">
   <div class="row">
-  	<div class="col-lg-12">
+  	<div class="col-md-8">
   	  <h3>ToDoの追加</h3>
       <%= form_with(model: @todolist, url: todolists_path, local: true) do |t| %>
         <label class="new-todo-body" for="">やる事</label>
         <%= t.text_area :body, class: 'form-control', style: "height: 100px;" %>
         <label class="new-todo-deadtime" for="">目標期限</label><br>
          <%= t.date_field :deadline, min: Date.today, max: Date.today+100, style: "width: 150px;" %>
-        <div class="new-todo-create"><%= t.submit 'やる事を追加', class: "btn btn-warning", style: "width: 150px;" %></div>
+        <div class="new-todo-create"><%= t.submit 'リストに追加', class: "btn btn-warning", style: "width: 150px;" %></div>
       <% end %>
   	</div>
   </div>
   <div class="row">
     <div class="col-lg-12">
       <h3>ToDoList一覧</h3>
-	  <table class="table">
-	    <thead></thead>
-	    <tbody>
+      <div class="form-group">
+        <%= form_with(url: todolists_path, method: :get, local: true, class: "form-inline") do |f| %>
+          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 1 , :autocomplete=>"off") %>挑戦中</label>
+          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 2 ) %>達成</label>
+          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 3 ) %>未達</label>
+          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 4 ) %>全てのリスト</label>
+          <%= f.submit "表示を変更する", class: "btn btn-primary btn-mg" %>
+        <% end %>
+      </div>
+	  <table class="table table-hover" style="table-layout:fixed;width:100%;">
+	  	<colgroup>
+	  	  <col style="width:13%;">
+          <col style="width:60%;">
+          <col style="width:12%;">
+          <col style="width:10%;">
+        </colgroup>
+	    <thead>
+	      <tr>
+	      	<th>目標期限</th>
+            <th>内容</th>
+            <th>ステータス</th>
+            <th>その他</th>
+	      </tr>
+	    </thead>
+	    <tbody style="word-wrap:break-word;">
 	      <% @todolists.each do |list| %>
 		    <tr>
 		      <% if list.status == "challenge" %>
+		        <th>
+			      <h4><%= list.deadline.strftime("%Y-%m-%d") %></h4>
+			    </th>
 			    <th>
-			      <h4>
-			        <%= link_to edit_todolist_path(list.id), :style =>"color:red;" do %>
-			          ToDo：<%= list.body %>
-			        <% end %>
-			      </h4>
+			      <h4><%= list.body %></h4>
 			    </th>
 			    <th>
 			      <h4>
-			        <%= link_to edit_todolist_path(list.id), :style =>"color:red;" do %>
-			      	  期限まで後<%= current_user.ckeck_date(list) %>日
-			        <% end %>
+			      	期限まで後<%= current_user.ckeck_date(list) %>日
+			        <br><br>
+			        <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
 			      </h4>
 			    </th>
 			    <th>
-                  <%= link_to '達成！', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
+                  <%= link_to "編集", edit_todolist_path(list.id), :class =>"btn btn-success" %>
+                  <br><br>
+                  <%= link_to "削除", todolist_path(list.id), method: :delete, data: {confirm: 'Todoリストから削除しますか？'}, :class =>"btn btn-danger" %>
 			    </th>
-	            <th>
-	              <%= link_to "削除", todolist_path(list.id), method: :delete, data: {confirm: 'Todoリストから削除しますか？'}, :class =>"btn btn-danger" %>
-	            </th>
 			  <% elsif list.status == "complete" %>
-			    <th><h4>ToDo：<%= list.body %></h4></th>
+			    <th><h4><%= list.deadline.strftime("%Y-%m-%d") %></h4></th>
+			    <th><h4><%= list.body %></h4></th>
 			    <th><h4>達成</h4></th>
+			    <th><h4 class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:blue;"></h4></th>
 			  <% elsif list.status == "unachieved" %>
-			    <th><h4>ToDo：<%= list.body %></h4></th>
-			    <th>未達</th>
+			  	<th><h4><%= list.deadline.strftime("%Y-%m-%d") %></h4></th>
+			    <th><h4><%= list.body %></h4></th>
+			    <th><h5>未達</h5></th>
+			    <th><h4 class="glyphicon glyphicon-warning-sign" aria-hidden="true"></h4></th>
 	          <% else %>
 	          <% end %>
 			</tr>

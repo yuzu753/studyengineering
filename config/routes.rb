@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :tops, only: [:top]
+  resources :tops, only: [:top, :privacy]
   get 'tops/top', to: 'tops#top'
+  get 'tops/privacy', to: 'tops#privacy'
 
   resources :users, only: [:show, :edit, :update, :destroy]
 

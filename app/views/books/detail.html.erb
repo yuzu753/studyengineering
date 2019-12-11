@@ -1,19 +1,21 @@
 <div class="container book-show">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
       <img src="<%= @book.medium_image_url %>" alt="本の表紙"　width="300px" height="300px">
         <div class= "bookshelf-buttom">
         <% if user_signed_in? %>
           <% unless current_user.havebook(@book) %>
-            <%= form_with(url: bookshelves_path, local: true) do |f| %>
-              <%= f.hidden_field :book_code, value: @book.book_code %>
-              <%= f.submit "本棚に加える", class:"btn btn-primary btn-block" %>
-            <% end %>
+            <div class="book-btn">
+              <%= form_with(url: bookshelves_path, local: true) do |f| %>
+                <%= f.hidden_field :book_code, value: @book.book_code %>
+                <%= f.submit "本棚に加える", class:"btn btn-primary", style: "width :220px;" %>
+              <% end %>
+            </div>
           <% end %>
         <% end %>
       </div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-md-8">
       <ul class="list-group">
         <li class="book-title list-group-item">タイトル：<%= @book.title %></li>
         <li class="book-author list-group-item">著者：<%= @book.author %></li>
