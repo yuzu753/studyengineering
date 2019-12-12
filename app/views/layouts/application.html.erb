@@ -17,9 +17,12 @@
           <%= link_to "Study Engieering", user_path(current_user.id), id: "logo"%>
           <nav>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "ユーザー情報の編集", edit_user_path(current_user.id), class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
-              <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-home under_bar", :style => "color:#fff;" %></li>
-              <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-user under_bar", :style => "color:#fff;" %></li>
+              <li><a href= "https://www.wantedly.com" alt="wantedlyアイコンにリンク"　><i class="icon-on"><%= fa_icon("wikipedia-w 2x") %></i></a></li>
+              <li><a href= "https://github.co.jp/" alt="githubアイコンにリンク"　><i class="icon-on"><%= fa_icon("github 2x") %></i></a></li>
+              <li><a href= "https://twitter.com" alt="Twitterアイコンにリンク"　><i class="icon-on"><%= fa_icon("twitter 2x") %></i></a></li>
+              <li><%= link_to "ユーザー情報の編集", edit_user_path(current_user.id), class: "glyphicon glyphicon-user under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to "学習記録をつける", records_path, class: "glyphicon glyphicon-saved under_bar", :style => "color:#fff;" %></li>
+              <li><%= link_to " TODOリストの追加", todolists_path, class: "glyphicon glyphicon-list under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>
               <li><%= link_to " ログアウト", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out under_bar", :style => "color:#fff;" %></li>
             </ul>
@@ -30,6 +33,9 @@
           <div class="cdonline"><%= link_to "Study Engieering", root_path, id: "logo"%>
             <nav>
               <ul class="nav navbar-nav navbar-right nav-items">
+                <li><a href= "https://www.wantedly.com" alt="wantedlyアイコンにリンク"　><i class="icon-off"><%= fa_icon("wikipedia-w 2x") %></i></a></li>
+                <li><a href= "https://github.co.jp/" alt="githubアイコンにリンク"　><i class="icon-off"><%= fa_icon("github 2x") %></i></a></li>
+                <li><a href= "https://twitter.com" alt="Twitterアイコンにリンク"　><i class="icon-off"><%= fa_icon("twitter 2x") %></i></a></li>
                 <li><%= link_to " 技術書の検索", search_books_path, class: "glyphicon glyphicon-book under_bar", :style => "color:#fff;" %></li>
                 <li><%= link_to " 新規登録", new_user_registration_path, class: "glyphicon glyphicon-edit under_bar", :style => "color:#fff;" %></li>
                 <li><%= link_to " ログイン", new_user_session_path, class: "glyphicon glyphicon-log-in under_bar", :style => "color:#fff;" %></li>
@@ -48,9 +54,7 @@
           <ul class="nav navbar-nav navbar-center">
             <li class="list-inline-item"><%= link_to "StudyEngieeringトップページ", root_path, class: "under_bar", :style => "color:#fff;" %></li>
             <li class="list-inline-item"><a style = "color:#fff;">|</a></li>
-            <li class="list-inline-item"><%= link_to "プライバシーポリシー", "#", class: "under_bar", :style => "color:#fff;" %></li>
-            <li class="list-inline-item"><a style = "color:#fff;">|</a></li>
-            <li class="list-inline-item"><%= link_to "お問い合わせ", "#", class: "under_bar", :style => "color:#fff;" %></li>
+            <li class="list-inline-item"><%= link_to "プライバシーポリシー", tops_privacy_path, class: "under_bar", :style => "color:#fff;" %></li>
           </ul>
           <ul class="nav navbar-nav navbar-center">
             <li class="list-inline-item"><a style = "color:#fff; font-size: 12px;">© 2019 Copyright: Study Engieering</a></li>

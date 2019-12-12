@@ -33,10 +33,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.datetime :locked_at
 
       t.string :name
-      t.decimal :sum_studytime
-      t.string :github_url
-      t.string :twitter_url
-      t.string :wantedly_url
       t.timestamps null: false
     end
 

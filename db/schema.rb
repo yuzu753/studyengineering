@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.string "sales_date"
     t.string "price"
     t.string "author"
-    t.string "caption"
+    t.text "caption"
     t.string "review_average"
     t.string "review_count"
     t.string "small_image_url"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "title"
-    t.string "body"
+    t.text "body"
     t.decimal "studytime", precision: 10
     t.decimal "until_today_studytime", precision: 10
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "body"
+    t.text "body"
     t.date "deadline"
     t.integer "status", default: 0
   end
@@ -70,10 +70,6 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.decimal "sum_studytime", precision: 10
-    t.string "github_url"
-    t.string "twitter_url"
-    t.string "wantedly_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

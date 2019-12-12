@@ -2,7 +2,24 @@ class TodolistsController < ApplicationController
 	before_action :set_todolist, only: [:update, :destroy, :congratulations]
 
 	def index
-	  @todolists = current_user.todolists.all.page(params[:page]).per(10)
+	  #TODOステータス別のソート機能
+      if  params[:todo_status].to_i == 1
+      	@todolists = current_user.todolists.where(status: 0).order(:deadline).page(params[:page]).per(10)
+
+      elsif  params[:todo_status].to_i == 2
+      	@todolists = current_user.todolists.where(status: 1).order("id DESC").page(params[:page]).per(10)
+
+      elsif  params[:todo_status].to_i == 3
+      	@todolists = current_user.todolists.where(status: 2).order("id DESC").page(params[:page]).per(10)
+
+      elsif  params[:todo_status].to_i == 4
+	    @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
+
+      else
+	    @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
+
+	  end
+
 	  @todolist = Todolist.new
 	  @todolists.each do |todo|
 	  	if current_user.ckeck_date(todo) < 0 && todo.status == "challenge"
@@ -13,7 +30,10 @@ class TodolistsController < ApplicationController
 	end
 
 	def edit
-      @todolist = current_user.todolists.find(params[:id])
+      @todolist = Todolist.find(params[:id])
+      if @todolist.user_id != current_user.id
+      	redirect_to root_path
+      end
 	end
 
 	def create
@@ -30,8 +50,11 @@ class TodolistsController < ApplicationController
 
 	def update
 	  if @thetodolist.update(todolist_update_params)
-	    flash[:success_update]  = "Todoリストを更新しました"
+	    flash[:success_todo_update]  = "Todoリストを更新しました"
 		redirect_to todolists_path
+	  else
+	  	flash[:miss_todo_update]  = "項目を埋めて下さい"
+		redirect_to edit_todolist_path(@thetodolist.id)
 	  end
 	end
 

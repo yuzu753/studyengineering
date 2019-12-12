@@ -19,3 +19,29 @@
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
+//= require data-confirm-modal
+
+
+$(function(){
+  var nowchecked = $('input[name=study_term]:checked').val();
+    $('input[name=study_term]').click(function(){
+      if($(this).val() == nowchecked) {
+        $(this).prop('checked', false);
+          nowchecked = false;
+       } else {
+         nowchecked = $(this).val();
+       }
+    });
+});
+
+$(function(){
+  var nowchecked = $('input[name=todo_status]:checked').val();
+    $('input[name=todo_status]').click(function(){
+      if($(this).val() == nowchecked) {
+        $(this).prop('checked', false);
+          nowchecked = false;
+       } else {
+         nowchecked = $(this).val();
+       }
+    });
+});

@@ -77,6 +77,9 @@ gem 'dotenv-rails'
 gem 'twitter'
 gem 'rakuten_web_service'
 gem 'chartkick'
+gem 'font-awesome-rails'
+gem 'data-confirm-modal'
+
 
 
 
