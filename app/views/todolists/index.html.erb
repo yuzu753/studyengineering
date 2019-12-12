@@ -1,3 +1,24 @@
+<% if flash[:add_todo] %>
+  <div class="alert alert-success">
+    <%= flash[:add_todo] %>
+  </div>
+<% end %>
+<% if flash[:miss_add_todo] %>
+  <div class="alert alert-danger">
+    <%= flash[:miss_add_todo] %>
+  </div>
+<% end %>
+<% if flash[:success_todo_update] %>
+  <div class="alert alert-success">
+    <%= flash[:success_todo_update] %>
+  </div>
+<% end %>
+<% if flash[:success_update] %>
+  <div class="alert alert-info">
+    <%= flash[:success_update] %>
+  </div>
+<% end %>
+
 <div class="todo-index contaiber">
   <div class="row">
   	<div class="col-md-8">

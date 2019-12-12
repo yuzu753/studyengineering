@@ -53,7 +53,7 @@ class TodolistsController < ApplicationController
 	    flash[:success_todo_update]  = "Todoリストを更新しました"
 		redirect_to todolists_path
 	  else
-	  	flash[:miss_todo_update]  = "項目を項目を埋めて下さい"
+	  	flash[:miss_todo_update]  = "項目を埋めて下さい"
 		redirect_to edit_todolist_path(@thetodolist.id)
 	  end
 	end

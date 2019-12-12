@@ -1,3 +1,19 @@
+<% if flash[:success_update] %>
+  <div class="alert alert-success">
+    <%= flash[:success_update] %>
+  </div>
+<% end %>
+<% if flash[:user_update] %>
+  <div class="alert alert-success">
+    <%= flash[:user_update] %>
+  </div>
+<% end %>
+<% if flash[:miss_user_update] %>
+  <div class="alert alert-danger">
+    <%= flash[:miss_user_update] %>
+  </div>
+<% end %>
+
 <div class="user-show container">
   <div class="row">
     <div class="col-md-6">

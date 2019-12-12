@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       end
 
       rescue RakutenWebService::WrongParameter
-        flash.now[:danger] = 'キーワードが短すぎます'
+        flash.now[:danger] = 'Error: キーワードが短すぎます'
       ensure
 
       return books

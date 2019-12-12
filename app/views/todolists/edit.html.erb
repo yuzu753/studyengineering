@@ -1,3 +1,9 @@
+<% if flash[:miss_todo_update] %>
+  <div class="alert alert-danger">
+    <%= flash[:miss_todo_update] %>
+  </div>
+<% end %>
+
 <div class="todo-index contaiber">
   <div class="row">
   	<div class="col-md-8">

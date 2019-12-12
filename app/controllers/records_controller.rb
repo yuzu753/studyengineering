@@ -23,7 +23,7 @@ class RecordsController < ApplicationController
           flash[:add_record] = "本日の進捗を追加しました"
           redirect_to records_path
         else
-          flash[:miss_add_record] = "やる事と期限を入力してください"
+          flash[:miss_add_record] = "学習項目と期限を入力してください"
           redirect_to records_path
         end
       else
@@ -50,7 +50,7 @@ class RecordsController < ApplicationController
 	  	  re.save
         end
 
-	    flash[:success_record_update]  = "学習進捗内容を更新しました"
+	    flash[:success_record_update]  = "進捗内容を更新しました"
 		redirect_to records_path
 	  else
 	  	flash[:miss_recored_update]  = "項目を埋めて下さい"

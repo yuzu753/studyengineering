@@ -1,3 +1,29 @@
+<% if flash[:add_record] %>
+  <div class="alert alert-success">
+    <%= flash[:add_record] %>
+  </div>
+<% end %>
+<% if flash[:miss_add_record] %>
+  <div class="alert alert-danger">
+    <%= flash[:miss_add_record] %>
+  </div>
+<% end %>
+<% if flash[:miss_sameday_record] %>
+  <div class="alert alert-warning">
+    <%= flash[:miss_sameday_record] %>
+  </div>
+<% end %>
+<% if flash[:success_record_update] %>
+  <div class="alert alert-success">
+    <%= flash[:success_record_update] %>
+  </div>
+<% end %>
+<% if flash[:miss_recored_update] %>
+  <div class="alert alert-danger">
+    <%= flash[:miss_recored_update] %>
+  </div>
+<% end %>
+
 <div class="record-index contaiber">
   <div class="row">
   	<div class="col-md-8">

@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "title"
-    t.string "body"
+    t.text "body"
     t.decimal "studytime", precision: 10
     t.decimal "until_today_studytime", precision: 10
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_021239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "body"
+    t.text "body"
     t.date "deadline"
     t.integer "status", default: 0
   end

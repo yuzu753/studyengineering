@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :recommendeds, dependent: :destroy
   has_many :todolists, dependent: :destroy
 
+  validates :name, :email, presence: true
+
   def havebook(book)
     self.books.find_by(book_code: book.book_code)
   end

@@ -66,10 +66,11 @@ class UsersController < ApplicationController
 	def update
       user = current_user
       if user.update(user_update_params)
-	    flash[:notice] = '登録情報を更新しました'
+	    flash[:user_update] = '登録情報を更新しました'
 	    redirect_to user_path(current_user.id)
 	  else
-	  	render 'edit'
+	  	flash[:miss_user_update] = '登録情報の更新に失敗しました　空の項目があります'
+	  	redirect_to user_path(current_user.id)
 	  end
 	end
 
