@@ -16,10 +16,10 @@
       <h3>ToDoList一覧</h3>
       <div class="form-group">
         <%= form_with(url: todolists_path, method: :get, local: true, class: "form-inline") do |f| %>
-          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 1 , :autocomplete=>"off") %>挑戦中</label>
-          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 2 ) %>達成</label>
-          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 3 ) %>未達</label>
-          <label class="todo_button btn btn-default"><%= radio_button_tag( "todo_status", 4 ) %>全てのリスト</label>
+          <label class="todo_button"><%= radio_button_tag( "todo_status", 1) %>挑戦中</label>
+          <label class="todo_button"><%= radio_button_tag( "todo_status", 2) %>達成</label>
+          <label class="todo_button"><%= radio_button_tag( "todo_status", 3) %>未達</label>
+          <label class="todo_button"><%= radio_button_tag( "todo_status", 4) %>全てのリスト</label>
           <%= f.submit "表示を変更する", class: "btn btn-primary btn-mg" %>
         <% end %>
       </div>
@@ -69,7 +69,7 @@
 			  	<th><h4><%= list.deadline.strftime("%Y-%m-%d") %></h4></th>
 			    <th><h4><%= list.body %></h4></th>
 			    <th><h5>未達</h5></th>
-			    <th><h4 class="glyphicon glyphicon-warning-sign" aria-hidden="true"></h4></th>
+			    <th><h5 class="glyphicon glyphicon-warning-sign" aria-hidden="true"></h5></th>
 	          <% else %>
 	          <% end %>
 			</tr>
