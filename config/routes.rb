@@ -9,10 +9,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update, :destroy]
 
-  resources :books, { only: [:create] } do
+  resources :books, { only: [:show, :create] } do
   	collection do
   		get :search
-  		get :result
       get :detail
   	end
   end

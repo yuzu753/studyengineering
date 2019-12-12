@@ -5,11 +5,16 @@ class UsersController < ApplicationController
 	  if @user.id != current_user.id
         redirect_to user_path(current_user.id)
       end
+
 	  #TODOリスト表示用のインスタンス変数 && 未達ステータス更新用の処理
-	  if current_user.todolists.present?
-	  	todo_challenge = current_user.todolists.where(status: 0).order(:deadline)
-	    @todolists = todo_challenge.limit(5)
+	  current_user.todolists.where(status: 0).each do |todo|
+	  	if current_user.ckeck_date(todo) < 0
+	  	  todo.status = 2
+	  	  todo.save
+	  	end
 	  end
+	  todo_challenge = current_user.todolists.where(status: 0).order(:deadline)
+	  @todolists = todo_challenge.limit(5)
 
       #学習時間のグラフ用のインスタンス変数
       if  params[:study_term].to_i == 1

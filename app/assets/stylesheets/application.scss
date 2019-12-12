@@ -71,17 +71,77 @@ ul {
   padding-bottom: 30px;
 }
 
-.icon-wantedly {
+.icon-on {
   color: #0FF;
 }
 
-.icon-github {
-  color: #0FF;
+.icon-off {
+  color: #fff;
 }
 
-.icon-twitter {
-  color: #0FF;
+.loginbackimg {
+  width: 100%;
+  height: 650px;
+  background-image: url(login2.jpg);
 }
+
+.login-top {
+  position: relative;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);;
+}
+
+.form-login {
+    background-color: rgba(0,0,0,0.55);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    color:white;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+.form-control{
+    font-size: 18px!important;
+}
+
+.login-font {
+ border:0 solid #fff; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}
+
+.signup-top {
+  position: relative;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);;
+}
+
+.signupbackimg {
+  width: 100%;
+  height: 650px;
+  background-image: url(sign1.jpg);
+}
+
+.wrapper {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

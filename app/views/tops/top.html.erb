@@ -2,29 +2,57 @@
   <div class="container">
   	<div class="row">
       <p class="top-title" style="color: white; font-size: 12ex;">Study Engieering</p>
-      <p class="top-subtitle" style="color: white; font-size: xx-large;">みんなでエンジニアの学習を楽しもう！</p>
+      <p class="top-subtitle" style="color: white; font-size: xx-large;">みんなでエンジニア学習を楽しもう！</p>
       <p class="about-title" style="color: white; font-size: x-large;">Study Engieeringとは?</p>
 	  <p class="about-body" style="color: white;">ITエンジニア学習を行う人向けの学習記録サイトです<br>
 		本サイトでは学習内容と時間の記録、TODOリストの記録、技術書の管理を行えます<br>
-		皆さんのエンジニア学習の手助けになればと思います<br></p>
+		エンジニア学習の手助け用ツールとしてご活用ください<br></p>
 	</div>
 	<div class="row">
-	  <div class="col-md-6">
-	  	<h3 class="ranking-title">お勧め技術書ランキング</h3>
+	  <div class="col-md-3">
 	  	<ul class="list-group">
+	  	  <li class="list-group-item">
+	  	    <h4 class="ranking-title">お勧め技術書ランキング</h4>
+	  	  </li>
 	  	  <% @book_ranks.each.with_index(1) do |b, i| %>
 	        <li class="list-group-item">
-	      	  <%= i %>位：<%= b.title %>
+	          <%= link_to book_path(b.id) do %>
+	      	    <%= i %>位：<%= b.title %>
+	      	  <% end %>
 	        </li>
 	      <% end %>
 	    </ul>
 	  </div>
-	  <div class="col-md-6">
-	  	<h3 class="ranking-title">学習時間ランキング</h3>
+	  <div class="col-md-3">
 	  	<ul class="list-group">
+	  	  <li class="list-group-item"><h4 class="ranking-title">総学習時間ランキング</h4></li>
 	  	  <% @study_ranks.each.with_index(1) do |s, e| %>
 	        <li class="list-group-item">
-	      	  <%= e %>位：<%= s.name %>
+	      	  <%= e %>位：<%= s.name %> さん (<%= s.records.sum(:studytime) %>時間)
+	        </li>
+	      <% end %>
+	    </ul>
+	  </div>
+	  <div class="col-md-3">
+	  	<ul class="list-group">
+	  	  <li class="list-group-item">
+	  	  	<h4 class="ranking-title">月間学習時間ランキング</h4>
+	  	  </li>
+	  	  <% @monthly_study_ranks.each.with_index(1) do |s, e| %>
+	        <li class="list-group-item">
+	      	  <%= e %>位：<%= s.name %> さん (<%= s.records.where("created_at > :date", date: Date.today - 30).sum(:studytime) %>時間)
+	        </li>
+	      <% end %>
+	    </ul>
+	  </div>
+	  <div class="col-md-3">
+	  	<ul class="list-group">
+	  	  <li class="list-group-item">
+	  	  	<h4 class="ranking-title">週間学習時間ランキング</h4>
+	  	  </li>
+	  	  <% @weekly_study_ranks.each.with_index(1) do |s, e| %>
+	        <li class="list-group-item">
+	      	  <%= e %>位：<%= s.name %> さん (<%= s.records.where("created_at > :date", date: Date.today - 7).sum(:studytime) %>時間)
 	        </li>
 	      <% end %>
 	    </ul>

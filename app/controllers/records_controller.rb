@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
 	def create
 	  record = Record.new(record_params)
       record.user_id = current_user.id
-      if  current_user.records.last.created_at.strftime("%Y-%m-%d") != Date.today.strftime("%Y-%m-%d")
+      if  current_user.records.blank? || current_user.records.last.created_at.strftime("%Y-%m-%d") != Date.today.strftime("%Y-%m-%d")
         if  record.save
       	  totalstudytime = current_user.records.sum(:studytime) + record.studytime
           record.until_today_studytime = totalstudytime
@@ -37,11 +37,11 @@ class RecordsController < ApplicationController
 	  if record.update(record_update_params)
 	  	allrecords =  current_user.records.all
 
-	  	allrecords.each do |re|
+	  	allrecords.each.with_index(0) do |re, e|
 	      i = 0
-	      s = 1
+	      s = 0
 	      until_total_studytime = 0
-	  	  while s <= re.id
+	  	  while s <= e
 	  	  	until_total_studytime += allrecords[i].studytime
 	  	  	i += 1
 	  	  	s += 1
@@ -54,7 +54,7 @@ class RecordsController < ApplicationController
 		redirect_to records_path
 	  else
 	  	flash[:miss_recored_update]  = "項目を埋めて下さい"
-		render 'edit'
+		redirect_to records_path
 	  end
 	end
 

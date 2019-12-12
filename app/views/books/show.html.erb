@@ -1,0 +1,33 @@
+<div class="container book-show">
+  <div class="row">
+    <div class="col-lg-4">
+      <img src="<%= @book.medium_image_url %>" alt="本の表紙"　width="300px" height="300px">
+        <div class= "bookshelf-buttom">
+        <% if user_signed_in? %>
+          <% unless current_user.havebook(@book) %>
+            <div class="book-btn">
+              <%= form_with(url: bookshelves_path, local: true) do |f| %>
+                <%= f.hidden_field :book_code, value: @book.book_code %>
+                <%= f.submit "本棚に加える", class:"btn btn-primary", style: "width :220px;" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li class="book-title list-group-item">タイトル：<%= @book.title %></li>
+        <li class="book-author list-group-item">著者：<%= @book.author %></li>
+        <li class="book-price list-group-item">価格：<%= @book.price %>円(税込)</li>
+        <li class="book-release list-group-item">発売日：<%= @book.sales_date %></li>
+        <li class="book-description list-group-item">レビュー評価値：<%= @book.review_average %></li>
+        <li class="book-description list-group-item">レビュー数：<%= @book.review_count %></li>
+        <li class="book-description list-group-item"><%= @book.caption %></li>
+      </ul>
+      <div class= "bookshelf-buttom">
+        <input type="button" onclick="location.href='<%= @book.url %>'"value="楽天で確認する", class= "btn btn-danger btn-block">
+      </div>
+    </div>
+  </div>
+</div>
