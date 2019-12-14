@@ -56,19 +56,13 @@
       <h3>学習時間</h3>
       <div class="form-group">
         <%= form_with(url: user_path(current_user.id), method: :get, local: true, class: "form-inline") do |f| %>
-          <label class="term_button"><%= radio_button_tag( "study_term", 1 ) %>１週間</label>
-          <label class="term_button"><%= radio_button_tag( "study_term", 2 ) %>１ヶ月</label>
-          <label class="term_button"><%= radio_button_tag( "study_term", 3 ) %>３ヶ月</label>
-          <label class="term_button"><%= radio_button_tag( "study_term", 4 ) %>１年間</label>
-          <label class="term_button"><%= radio_button_tag( "study_term", 5 ) %>全期間</label>
+          <%= f.select :study_term, [['期間別に表示', 0], ['１週間', 1], ['１ヶ月', 2], ['３ヶ月', 3], ['１年間', 4], ['全期間', 5]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
           <%= f.submit "期間を変更する", class: "btn btn-primary btn-mg" %>
         <% end %>
       </div>
-      <% if @studychart.present? %>
-        <%= line_chart @studychart %>
-      <% else %>
-        <h4>学習時間を記録しよう！</h4>
-      <% end %>
+      <div id="studychart_area">
+        <%= render partial: "records/studychart", locals: { studychart: @studychart } %>
+      </div>
     </div>
   </div>
 </div>

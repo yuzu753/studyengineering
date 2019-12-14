@@ -1,4 +1,5 @@
 class RecommendedsController < ApplicationController
+	before_action :authenticate_user!
 
 	def create
 	  recommend = Recommended.create(user_id: current_user.id, book_id: recommend_params[:book_id])

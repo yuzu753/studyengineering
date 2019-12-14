@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!
 
 	def show
 	  @user = User.find(params[:id])
@@ -16,8 +17,21 @@ class UsersController < ApplicationController
 	  todo_challenge = current_user.todolists.where(status: 0).order(:deadline)
 	  @todolists = todo_challenge.limit(5)
 
-      #学習時間のグラフ用のインスタンス変数
-      if  params[:study_term].to_i == 1
+      #TODOの達成率のチャート用インスタンス変数
+	  @completes = current_user.todolists.where(status: 1)
+	  @unachieved = current_user.todolists.where(status: 2)
+	  @todochart = [['達成数', @completes.count], ['未達数', @unachieved.count]]
+
+      #楽天ブックスからの取得データの表示用インスタンス変数
+	  @interest_books = current_user.bookshelves.where(status: 0)
+	  @reading_books = current_user.bookshelves.where(status: 1)
+	  @read_books = current_user.bookshelves.where(status: 2)
+
+	  #技術書お勧め用のインスタンス変数
+	  @recommned = Recommended.new
+
+	  #学習時間のグラフ用のインスタンス変数
+      if     params[:study_term].to_i == 1
       	@studytimes = current_user.records.where("created_at > :date", date: Date.today - 7)
 
       elsif  params[:study_term].to_i == 2
@@ -42,18 +56,6 @@ class UsersController < ApplicationController
 	    @studychart << [s.created_at.strftime("%Y-%m-%d"), s.until_today_studytime]
 	  end
 
-      #TODOの達成率のチャート用インスタンス変数
-	  @completes = current_user.todolists.where(status: 1)
-	  @unachieved = current_user.todolists.where(status: 2)
-	  @todochart = [['達成数', @completes.count], ['未達数', @unachieved.count]]
-
-      #楽天ブックスからの取得データの表示用インスタンス変数
-	  @interest_books = current_user.bookshelves.where(status: 0)
-	  @reading_books = current_user.bookshelves.where(status: 1)
-	  @read_books = current_user.bookshelves.where(status: 2)
-
-	  #技術書お勧め用のインスタンス変数
-	  @recommned = Recommended.new
 	end
 
 	def edit
@@ -83,7 +85,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_update_params
-      params.require(:user).permit(:name, :email, :password, :github_url, :twitter_url, :wantedly_url)
+      params.require(:user).permit(:name, :email)
 	end
 
 end

@@ -1,4 +1,5 @@
 class TodolistsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_todolist, only: [:update, :destroy, :congratulations]
 
 	def index
@@ -27,6 +28,7 @@ class TodolistsController < ApplicationController
 	  		todo.save
 	  	end
 	  end
+	  render :index
 	end
 
 	def edit
@@ -37,14 +39,15 @@ class TodolistsController < ApplicationController
 	end
 
 	def create
+	  @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
 	  todolist = Todolist.new(todolist_params)
       todolist.user_id = current_user.id
       if todolist.save
-        flash[:add_todo] = "todolistに目標を追加しました"
-        redirect_to todolists_path
+        flash[:add_todo] = "リストに目標を追加しました"
+        render :index
       else
         flash[:miss_add_todo] = "やる事と期限を入力してください"
-        redirect_to todolists_path
+        render :message
       end
 	end
 
@@ -59,11 +62,14 @@ class TodolistsController < ApplicationController
 	end
 
 	def destroy
+	  @todolists = current_user.todolists.where(status: 0).order(:deadline).page(params[:page]).per(10)
       @thetodolist.destroy
-      redirect_to todolists_path
+      flash[:destroy_todo] = "リストを削除しました"
+      render :index
 	end
 
 	def congratulations
+	  @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
       @thetodolist.congratulations!
       flash[:success_update]  = "達成おめでとうございます!!"
       redirect_to todolists_path

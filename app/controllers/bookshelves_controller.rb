@@ -1,4 +1,5 @@
 class BookshelvesController < ApplicationController
+	before_action :authenticate_user!
 
 	def create
 	  book = Book.find_or_initialize_by(book_code: bookcode_params[:book_code])
