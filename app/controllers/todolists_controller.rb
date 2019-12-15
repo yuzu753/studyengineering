@@ -13,9 +13,6 @@ class TodolistsController < ApplicationController
       elsif  params[:todo_status].to_i == 3
       	@todolists = current_user.todolists.where(status: 2).order("id DESC").page(params[:page]).per(10)
 
-      elsif  params[:todo_status].to_i == 4
-	    @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
-
       else
 	    @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
 
@@ -69,7 +66,6 @@ class TodolistsController < ApplicationController
 	end
 
 	def congratulations
-	  @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
       @thetodolist.congratulations!
       flash[:success_update]  = "達成おめでとうございます!!"
       redirect_to todolists_path

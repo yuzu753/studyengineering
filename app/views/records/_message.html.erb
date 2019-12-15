@@ -1,0 +1,14 @@
+<% if flash[:miss_add_record] %>
+  <div class="remove">
+    <div class="alert alert-danger">
+      <%= flash[:miss_add_record] %>
+    </div>
+  </div>
+<% end %>
+<% if flash[:miss_sameday_record] %>
+  <div class="remove">
+    <div class="alert alert-warning">
+      <%= flash[:miss_sameday_record] %>
+    </div>
+  </div>
+<% end %>

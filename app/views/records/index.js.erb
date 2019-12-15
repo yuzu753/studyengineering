@@ -1,0 +1,7 @@
+$("#records_area").html("<%= j(render 'records', { records: @records }) %>")
+$("textarea").val('')
+$("input").val('')
+
+$(function(){
+  setTimeout("$('.remove').fadeOut('slow')", 3000)
+})

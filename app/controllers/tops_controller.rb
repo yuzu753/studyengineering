@@ -13,7 +13,6 @@ class TopsController < ApplicationController
 	  studytime_hash = {}
 	  studytime_hash = Hash[*studytime_arry.flatten]   #{"user.id"=>title_studytime, ""=>,""=>}  ハッシュ化する
 	  sutdytime_sort = studytime_hash.sort_by{ | k, v | v }.reverse  #ハッシュバリューの大きい順に並べ替えして配列化  [[user.id, title_studytim], [...] ...]
-	  study_userid = []
 	  i = 0
 	  @study_ranks = []
 
@@ -33,7 +32,6 @@ class TopsController < ApplicationController
 	  studytime_hash = {}
 	  studytime_hash = Hash[*studytime_arry.flatten]
 	  sutdytime_sort = studytime_hash.sort_by{ | k, v | v }.reverse
-	  study_userid = []
 	  i = 0
 	  @monthly_study_ranks = []
 
@@ -53,7 +51,6 @@ class TopsController < ApplicationController
 	  studytime_hash = {}
 	  studytime_hash = Hash[*studytime_arry.flatten]
 	  sutdytime_sort = studytime_hash.sort_by{ | k, v | v }.reverse
-	  study_userid = []
 	  i = 0
 	  @weekly_study_ranks = []
 
