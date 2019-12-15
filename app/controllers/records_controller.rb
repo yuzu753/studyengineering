@@ -18,19 +18,26 @@ class RecordsController < ApplicationController
 	  @records = current_user.records.order("id DESC").page(params[:page]).per(10)
 	  @record = Record.new(record_params)
       @record.user_id = current_user.id
+
       #本日2回連続投稿を禁止するif文
+      if  current_user.records.blank? || current_user.records.last.created_at.strftime("%Y-%m-%d") != Date.today.strftime("%Y-%m-%d")
         if  @record.save
       	  totalstudytime = current_user.records.sum(:studytime)
           @record.until_today_studytime = totalstudytime
           @record.save
           flash[:add_record] = "本日の進捗を追加しました"
-          @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
+          #Twitter投稿用の記述
+          # @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
           render :index
         else
           flash[:miss_add_record] = "学習項目と期限を入力してください"
           render :message
         end
       #elseの選択肢を入れる
+      else
+      	flash[:miss_sameday_record] = "同じ日に学習記録があります"
+        render :message
+      end
 	end
 
 	def update

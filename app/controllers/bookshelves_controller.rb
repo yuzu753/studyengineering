@@ -14,8 +14,6 @@ class BookshelvesController < ApplicationController
 	  bookshelf.user_id = current_user.id
 	  bookshelf.book_id = book.id
 	  bookshelf.save
-	  flash[:bookget] = "本棚へ追加しました"
-	  redirect_to user_path(current_user.id)
 	end
 
 	def update

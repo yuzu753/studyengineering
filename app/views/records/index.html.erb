@@ -30,7 +30,7 @@
       <% end %>
       <br>
       <div id="record_message_area" class="col-md-8">
-          <%= render partial: "message", locals: { records: @records } %>
+        <%= render partial: "message", locals: { records: @records } %>
       </div>
       <% if flash[:success_record_update] %>
         <div class="remove">
@@ -47,7 +47,8 @@
         </div>
       <% end %>
     </div>
-  <div id="records_area">
-    <%= render partial: "records", locals: { records: @records } %>
+    <div id="records_area">
+      <%= render partial: "records", locals: { records: @records } %>
+    </div>
   </div>
 </div>
