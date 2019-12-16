@@ -8,7 +8,7 @@
             <div class="book-btn">
               <%= form_with(url: bookshelves_path, local: true) do |f| %>
                 <%= f.hidden_field :book_code, value: @book.book_code %>
-                <%= f.submit "本棚に加える", class:"btn btn-primary", style: "width :220px;", :id=>"notice" %>
+                <%= f.submit "本棚に加える", class:"btn btn-primary", style: "width :220px;" %>
               <% end %>
             </div>
           <% end %>
@@ -31,57 +31,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(function(){
-  // Web Notificationsが有効
-  if (window.Notification) {
-    $("#message").text("");
-  } else {
-    $("#message").text("");
-    $("#notice").remove();
-    $("form").remove();
-  }
-  // 通知テストボタンクリック時
-  $("#notice").click(function(){
-    // 入力値を取得
-    var body = "マイページの本棚に追加しました";
-    if(window.Notification == null) return;
-    // 通知の許可状態
-    switch(Notification.permission){
-      // 許可
-      case "granted":
-        // 通知を表示
-        NotificationTest(body);
-        break;
-      // 未確認
-      case "default":
-        // ユーザーに許可をリクエストする
-        Notification.requestPermission(function(permission){
-        // 許可されたら通知を表示
-          if(Notification.permission == "granted"){
-            NotificationTest(body);
-          }
-        });
-        break;
-      // 拒否
-      case "denied":
-        break;
-  }
-  });
-  // 指定されたパラメータで通知を表示
-  function NotificationTest(body){
-    var n = new Notification(
-      body,
-        {}
-    );
-    n.onclick = function(){
-      this.close();
-      window.open().close();
-      window.focus();
-    };
-    setTimeout(n.close.bind(n), 6000);
-  }
-});
-</script>
-

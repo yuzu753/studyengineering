@@ -1,3 +1,8 @@
+<% if flash[:success_getbook] %>
+  <div class="alert alert-success">
+    <%= flash[:success_getbook] %>
+  </div>
+<% end %>
 <% if flash[:success_update] %>
   <div class="alert alert-success">
     <%= flash[:success_update] %>
@@ -13,55 +18,61 @@
     <%= flash[:miss_user_update] %>
   </div>
 <% end %>
-
+<br><br>
 <div class="user-show container">
   <div class="row">
     <div class="col-md-6">
-     <h3>ToDoList一覧</h3>
-      <table class="table table-hover" style="table-layout:fixed;width:100%;">
-        <colgroup>
-          <col style="width:72%;">
-          <col style="width:13%;">
-          <col style="width:15%;">
-        </colgroup>
-      <thead>
-        <tr>
-          <th>内容</th>
-          <th>期限</th>
-          <th>報告</th>
-        </tr>
-      </thead>
-        <tbody style="word-wrap:break-word;">
-          <% if current_user.todolists.present? %>
-            <% @todolists.each do |list| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>ToDoList一覧</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover" style="table-layout:fixed;width:100%;">
+            <colgroup>
+              <col style="width:72%;">
+              <col style="width:13%;">
+              <col style="width:15%;">
+            </colgroup>
+            <thead>
               <tr>
-                  <th>
-                    <%= list.body %>
-                  </th>
-                  <th>
-                    <%= current_user.ckeck_date(list) %>日
-                  </th>
-                  <th>
-                    <%= link_to '達成', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %>
-                  </th>
+                <th>内容</th>
+                <th>期限</th>
+                <th>報告</th>
               </tr>
-            <% end %>
-          <% else %>
-            <h4>Listにデータがありません</h4>
-          <% end %>
-        </tbody>
-      </table>
+            </thead>
+            <tbody style="word-wrap:break-word;">
+              <% if current_user.todolists.present? %>
+                <% @todolists.each do |list| %>
+                  <tr>
+                    <th><%= list.body %></th>
+                    <th><%= current_user.ckeck_date(list) %>日</th>
+                    <th><%= link_to '達成', todolist_congratulations_path(list), method: :patch, :class =>"btn btn-primary" %></th>
+                  </tr>
+                <% end %>
+              <% else %>
+                <h4>Listにデータがありません</h4>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <h3>学習時間</h3>
-      <div class="form-group">
-        <%= form_with(url: user_path(current_user.id), method: :get, local: true, class: "form-inline") do |f| %>
-          <%= f.select :study_term, [['期間別に表示', 0], ['１週間', 1], ['１ヶ月', 2], ['３ヶ月', 3], ['１年間', 4], ['全期間', 5]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
-          <%= f.submit "期間を変更する", class: "btn btn-primary btn-mg" %>
-        <% end %>
-      </div>
-      <div id="studychart_area">
-        <%= render partial: "records/studychart", locals: { studychart: @studychart } %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>学習時間</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <%= form_with(url: user_path(current_user.id), method: :get, local: true, class: "form-inline") do |f| %>
+              <%= f.select :study_term, [['期間別に表示', 0], ['１週間', 1], ['１ヶ月', 2], ['３ヶ月', 3], ['１年間', 4], ['全期間', 5]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
+              <%= f.submit "期間を変更する", class: "btn btn-primary btn-mg" %>
+            <% end %>
+          </div>
+          <div id="studychart_area">
+            <%= render partial: "records/studychart", locals: { studychart: @studychart } %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -69,25 +80,60 @@
 <div class="user-show container">
   <div class="row">
     <div class="col-md-6">
-      <h3>ToDo達成率</h3>
-      <% if @completes.present? || @unachieved.present? %>
-        <%= pie_chart @todochart %>
-      <% else %>
-        <h4>ToDo達成を報告しよう！</h4>
-      <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>ToDo達成率</h3>
+        </div>
+        <div class="panel-body">
+          <% if @completes.present? || @unachieved.present? %>
+            <%= pie_chart @todochart %>
+          <% else %>
+            <h4>ToDo達成を報告しよう！</h4>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <h3>読書中の本</h3>
-      <% @reading_books.each do |bo| %>
-        <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>読書中の本</h3>
+        </div>
+        <div class="panel-body">
+          <% @reading_books.each do |bo| %>
+            <div class="col-sm-4">
+              <ul class="usershow-book list-group">
+                <li class="bookimage list-group-book">
+                  <img src="<%= bo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+                </li>
+                <%= form_with(model: bo, url: bookshelf_path(bo.id), local: true) do |fo| %>
+                  <li class="status list-group-item"><%= fo.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
+                  <%= fo.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="user-show container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>興味のある本</h3>
+    </div>
+    <div class="panel-body">
+      <% @interest_books.each do |b| %>
+        <div class="col-sm-2">
           <ul class="usershow-book list-group">
             <li class="bookimage list-group-book">
-              <img src="<%= bo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+              <img src="<%= b.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
             </li>
-             <%= form_with(model: bo, url: bookshelf_path(bo.id), local: true) do |fo| %>
-                <li class="status list-group-item"><%= fo.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
-                <%= fo.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
-             <% end %>
+            <%= form_with(model: b, url: bookshelf_path(b.id), local: true) do |f| %>
+              <li class="status list-group-item"><%= f.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
+              <%= f.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
+            <% end %>
+            <%= link_to "削除する", bookshelf_path(b.id), method: :delete, data: {confirm: '本棚から取り除きますか？'}, :class =>"btn btn-danger btn-block" %>
           </ul>
         </div>
       <% end %>
@@ -95,47 +141,35 @@
   </div>
 </div>
 <div class="user-show container">
-  <h3>興味のある本</h3>
-    <% @interest_books.each do |b| %>
-      <div class="col-sm-2">
-        <ul class="usershow-book list-group">
-          <li class="bookimage list-group-book">
-            <img src="<%= b.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
-          </li>
-          <%= form_with(model: b, url: bookshelf_path(b.id), local: true) do |f| %>
-            <li class="status list-group-item"><%= f.select :status, Bookshelf.statuses.keys.to_a, {} %></li>
-            <%= f.submit 'ステータス更新', :class=>"btn btn-primary  btn-block" %>
-          <% end %>
-          <%= link_to "削除する", bookshelf_path(b.id), method: :delete, data: {confirm: '本棚から取り除きますか？'}, :class =>"btn btn-danger btn-block" %>
-        </ul>
-      </div>
-    <% end %>
-</div>
-<div class="user-show container">
-  <h3>学習済みの本</h3>
-    <% @read_books.each do |boo| %>
-      <div class="col-sm-2">
-        <ul class="usershow-book list-group">
-          <li class="bookimage list-group-book">
-            <img src="<%= boo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
-          </li>
-          <% if current_user.already_recommended?(boo.book) %>
-            <li class="recommend list-group-book">
-              <%= link_to recommended_path(book_id: boo.book_id), method: :delete do %>
-                <i class="glyphicon glyphicon-star" aria-hidden="true" style="color: gold;"></i>
-                 <i>お勧め済み</i>
-              <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>学習済みの本</h3>
+    </div>
+    <div class="panel-body">
+      <% @read_books.each do |boo| %>
+        <div class="col-sm-2">
+          <ul class="usershow-book list-group">
+            <li class="bookimage list-group-book">
+              <img src="<%= boo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
             </li>
-          <% else %>
-             <li class="recommend list-group-book">
-              <%= link_to recommendeds_path(book_id: boo.book_id), method: :post do %>
-                <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
-                <i>お勧めする</i>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+            <% if current_user.already_recommended?(boo.book) %>
+              <li class="recommend list-group-book">
+                <%= link_to recommended_path(book_id: boo.book_id), method: :delete do %>
+                  <i class="glyphicon glyphicon-star" aria-hidden="true" style="color: gold;"></i>
+                   <i>お勧め済み</i>
+                <% end %>
+              </li>
+            <% else %>
+               <li class="recommend list-group-book">
+                <%= link_to recommendeds_path(book_id: boo.book_id), method: :post do %>
+                  <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                  <i>お勧めする</i>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

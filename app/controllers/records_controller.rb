@@ -27,13 +27,13 @@ class RecordsController < ApplicationController
           @record.save
           flash[:add_record] = "本日の進捗を追加しました"
           #Twitter投稿用の記述
-          # @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
+          @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
           render :index
         else
           flash[:miss_add_record] = "学習項目と期限を入力してください"
           render :message
         end
-      #elseの選択肢を入れる
+      #本日2回連続投稿の失敗処理を入れる
       else
       	flash[:miss_sameday_record] = "同じ日に学習記録があります"
         render :message
@@ -47,12 +47,10 @@ class RecordsController < ApplicationController
 
 	  	allrecords.each.with_index(0) do |re, e|
 	      i = 0
-	      s = 0
 	      until_total_studytime = 0
-	  	  while s <= e
+	  	  while i <= e
 	  	  	until_total_studytime += allrecords[i].studytime
 	  	  	i += 1
-	  	  	s += 1
 	  	  end
 	  	  re.until_today_studytime = until_total_studytime
 	  	  re.save
