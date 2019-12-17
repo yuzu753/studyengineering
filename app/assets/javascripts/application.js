@@ -10,9 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-
 //= require jquery3
+//= require rails-ujs
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/locale-all
+
 //= popper
 //= require bootstrap-sprockets
 //= require activestorage
@@ -21,6 +24,13 @@
 //= require Chart.bundle
 //= require data-confirm-modal
 
+//非同期時のフラッシュメッセージ再読み込み時に消すための機能
 $(function(){
-  setTimeout("$('.remove').fadeOut('slow')", 3000)
+  setTimeout("$('.remove').hide()", 0)
 })
+
+//フラッシュメッセージのフェードアウト用の記述
+$(function(){
+  setTimeout("$('.fadeout').fadeOut('slow')", 3000)
+})
+

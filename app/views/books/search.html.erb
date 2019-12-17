@@ -3,6 +3,11 @@
     <%= flash[:danger] %>
   </div>
 <% end %>
+<% if flash[:success_getbook] %>
+  <div class="alert alert-success">
+    <%= flash[:success_getbook] %>
+  </div>
+<% end %>
 
 <div class="container">
   <h3>技術書一覧</h3>
@@ -23,5 +28,4 @@
 <div class="search_backimage">
   <%= render partial: "books", books: @books %>
 </div>
-
 

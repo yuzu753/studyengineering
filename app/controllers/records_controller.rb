@@ -41,8 +41,8 @@ class RecordsController < ApplicationController
 	end
 
 	def update
-	  record = current_user.records.find(params[:id])
-	  if record.update(record_params)
+	  @record = current_user.records.find(params[:id])
+	  if @record.update(record_params)
 	  	allrecords =  current_user.records.all
 
 	  	allrecords.each.with_index(0) do |re, e|
@@ -60,14 +60,14 @@ class RecordsController < ApplicationController
 		redirect_to records_path
 	  else
 	  	flash[:miss_recored_update]  = "項目を埋めて下さい"
-		redirect_to records_path
+		redirect_to edit_record_path(@record.id)
 	  end
 	end
 
 	private
 
 	def record_params
-	  params.require(:record).permit(:title, :body, :studytime, :until_today_studytime)
+	  params.require(:record).permit(:title, :body, :studytime)
 	end
 
 	def twitter_client

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'tops/top', to: 'tops#top'
   get 'tops/privacy', to: 'tops#privacy'
 
-  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :users, only: [:show, :edit, :update, :destroy, :calendar]
 
   resources :books, { only: [:show, :create] } do
   	collection do

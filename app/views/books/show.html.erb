@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-4">
       <img src="<%= @book.medium_image_url %>" alt="本の表紙"　width="300px" height="300px">
-        <div class= "bookshelf-buttom">
+        <div class= "bookshelf-buttom_show">
         <% if user_signed_in? %>
           <% unless current_user.havebook(@book) %>
             <div class="book-btn">

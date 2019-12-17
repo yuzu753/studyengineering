@@ -14,14 +14,14 @@
         <div id="todo_message_area" class="col-md-8">
           <%= render partial: "message", locals: { todolists: @todolists } %>
           <% if flash[:success_todo_update] %>
-            <div class="remove">
+            <div class="fadeout">
               <div class="alert alert-success">
                 <%= flash[:success_todo_update] %>
               </div>
             </div>
           <% end %>
           <% if flash[:success_update] %>
-            <div class="remove">
+            <div class="fadeout">
               <div class="alert alert-info">
                 <%= flash[:success_update] %>
               </div>
@@ -35,5 +35,4 @@
     <%= render partial: "todolists", locals: { todolists: @todolists } %>
   </div>
 </div>
-
 
