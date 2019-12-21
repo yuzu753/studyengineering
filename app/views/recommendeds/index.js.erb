@@ -1,1 +1,6 @@
 $("#recommendeds_area").html("<%= j(render 'recommendeds/recommendeds', { read_books: @read_books }) %>")
+
+$(function(){
+	$(".remove").show()
+  setTimeout("$('.remove').fadeOut('slow')", 3000)
+})
