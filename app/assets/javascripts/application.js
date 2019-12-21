@@ -10,9 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
 //= require rails-ujs
 
-//= require jquery3
 //= popper
 //= require bootstrap-sprockets
 //= require activestorage
@@ -22,26 +22,8 @@
 //= require data-confirm-modal
 
 
+//フラッシュメッセージのフェードアウト用の記述
 $(function(){
-  var nowchecked = $('input[name=study_term]:checked').val();
-    $('input[name=study_term]').click(function(){
-      if($(this).val() == nowchecked) {
-        $(this).prop('checked', false);
-          nowchecked = false;
-       } else {
-         nowchecked = $(this).val();
-       }
-    });
-});
+  setTimeout("$('.fadeout').fadeOut('slow')", 3000)
+})
 
-$(function(){
-  var nowchecked = $('input[name=todo_status]:checked').val();
-    $('input[name=todo_status]').click(function(){
-      if($(this).val() == nowchecked) {
-        $(this).prop('checked', false);
-          nowchecked = false;
-       } else {
-         nowchecked = $(this).val();
-       }
-    });
-});

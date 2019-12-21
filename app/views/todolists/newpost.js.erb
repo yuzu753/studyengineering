@@ -1,0 +1,8 @@
+$("#todo_newpost").prepend("<%= j(render 'todolist', { todolist: @todolist }) %>")
+$("textarea").val('')
+$(".date").val('')
+
+$(function(){
+	$(".remove_newpost").show()
+  setTimeout("$('.remove_newpost').fadeOut('slow')", 3000)
+})

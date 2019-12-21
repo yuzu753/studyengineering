@@ -1,0 +1,103 @@
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-sm-8">
+        <h3>ToDoList一覧</h3><br>
+      </div>
+      <div class="col-sm-4">
+        <% if flash[:destroy_todo] %>
+          <div class="remove">
+            <div class="alert alert-danger">
+              <%= flash[:destroy_todo] %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= form_with(url: todolists_path, method: :get, class: "form-inline") do |f| %>
+            <%= f.select :todo_status, [['ステータス別に表示', 0], ['挑戦中', 1], ['達成', 2], ['未達', 3], ['全てのリスト', 4]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
+            <%= f.submit "表示を変更する", class: "btn btn-primary btn-mg", :id=>"notice" %>
+          <% end %>
+        </div>
+        <br>
+      </div>
+  	  <table class="table table-hover" style="table-layout:fixed;width:100%;">
+  	  	<colgroup>
+  	  	  <col style="width:13%;">
+            <col style="width:60%;">
+            <col style="width:12%;">
+            <col style="width:10%;">
+          </colgroup>
+  	    <thead>
+  	      <tr>
+  	      	<th>目標期限</th>
+              <th>内容</th>
+              <th>ステータス</th>
+              <th>その他</th>
+  	      </tr>
+  	    </thead>
+  	    <tbody id="todo_newpost" style="word-wrap:break-word;">
+  	      <% todolists.each do |list| %>
+    		    <%= render partial: "todolist", locals: { todolist: list } %>
+    		  <% end %>
+  		  </tbody>
+  	  </table>
+  	  <div class="page_center">
+  	    <%= paginate todolists %>
+  	  </div>
+    </div>
+	</div>
+
+<script>
+$(function(){
+  // Notifications API
+  // Web Notificationsが有効
+  if (window.Notification) {
+    $("#message").text("");
+  } else {
+    $("#message").text("");
+    $("#notice").remove();
+    $("form").remove();
+  }
+  // ボタンクリック時
+  $("#notice").click(function(){
+    // 入力値を取得
+    var body = "リストの表示を変更しました";
+    if(window.Notification == null) return;
+    // 通知の許可状態
+    switch(Notification.permission){
+      // 許可
+      case "granted":
+        // 通知を表示
+        NotificationTest(body);
+        break;
+      // 未確認
+      case "default":
+        // ユーザーに許可をリクエストする
+        Notification.requestPermission(function(permission){
+        // 許可されたら通知を表示
+          if(Notification.permission == "granted"){
+            NotificationTest(body);
+          }
+        });
+        break;
+      // 拒否
+      case "denied":
+        break;
+  }
+  });
+  // 指定されたパラメータで通知を表示
+  function NotificationTest(body){
+    var n = new Notification(
+      body,
+        {}
+    );
+    n.onclick = function(){
+      this.close();
+      window.open().close();
+      window.focus();
+    };
+    setTimeout(n.close.bind(n), 6000);
+  }
+});
+</script>

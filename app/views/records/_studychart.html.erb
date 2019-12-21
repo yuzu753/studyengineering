@@ -1,0 +1,12 @@
+<% if @studychart.present? %>
+  <div class="form-group">
+    <%= form_with(url: user_path(current_user.id), method: :get, local: true, class: "form-inline") do |f| %>
+      <%= f.select :study_term, [['期間別に表示', 0], ['１週間', 1], ['１ヶ月', 2], ['３ヶ月', 3], ['１年間', 4], ['全期間', 5]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
+      <%= f.submit "期間を変更する", class: "btn btn-primary btn-mg" %>
+    <% end %>
+  </div>
+  <p>時間(h)</p>
+  <%= line_chart @studychart, xtitle: "日付" %>
+<% else %>
+  <h4>学習時間を記録しよう！</h4>
+<% end %>

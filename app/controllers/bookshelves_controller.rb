@@ -1,4 +1,5 @@
 class BookshelvesController < ApplicationController
+	before_action :authenticate_user!
 
 	def create
 	  book = Book.find_or_initialize_by(book_code: bookcode_params[:book_code])
@@ -13,15 +14,15 @@ class BookshelvesController < ApplicationController
 	  bookshelf.user_id = current_user.id
 	  bookshelf.book_id = book.id
 	  bookshelf.save
-	  flash[:bookget] = "本棚へ追加しました"
-	  redirect_to user_path(current_user.id)
+	  flash[:success_getbook]  = "技術書「#{bookshelf.book.title}」を本棚に追加しました"
+	  redirect_back(fallback_location: root_path)
 	end
 
 	def update
 	  bookshelf = current_user.bookshelves.find(params[:id])
 	  if bookshelf.update(bookshelf_update_params)
-	    flash[:success_update]  = "本棚のステータスを更新しました"
-		redirect_to user_path(current_user.id)
+	    flash[:success_update]  = "「#{bookshelf.book.title}」のステータスを更新しました"
+		redirect_back(fallback_location: root_path)
 	  end
 	end
 

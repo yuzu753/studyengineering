@@ -1,0 +1,6 @@
+$("#todolists_area").html("<%= j(render 'todolists', { todolists: @todolists }) %>")
+
+$(function(){
+	$(".remove").show()
+  setTimeout("$('.remove').fadeOut('slow')", 3000)
+})

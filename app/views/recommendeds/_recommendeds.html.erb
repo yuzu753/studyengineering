@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>学習済みの本</h4>
+  </div>
+  <div class="panel-body">
+    <% read_books.each do |boo| %>
+      <div class="col-sm-2">
+        <div class="panel panel-default">
+          <div class="panel-heading usershow-book">
+            <%= link_to book_path(boo.book.id) do %>
+              <img src="<%= boo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
+            <% end %>
+          </div>
+          <ul class="usershow-book list-group">
+            <% if current_user.already_recommended?(boo.book) %>
+              <li class="recommend list-group-book">
+                <%= link_to recommended_path(id: current_user.recommendeds.find_by(user_id: current_user.id, book_id: boo.book_id).id), method: :delete, remote: true do %>
+                  <i class="glyphicon glyphicon-star" aria-hidden="true" style="color: gold;"></i>
+                  <i>お勧め済み</i>
+                <% end %>
+              </li>
+            <% else %>
+              <li class="recommend list-group-book">
+                <%= link_to recommendeds_path(book_id: boo.book_id), method: :post, remote: true do %>
+                  <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                  <i>お勧めする</i>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if flash[:create_recommend] %>
+  <div class="remove">
+    <div class="alert alert-success">
+      <%= flash[:create_recommend] %>
+    </div>
+  </div>
+<% end %>
+<% if flash[:destroy_recommend] %>
+  <div class="remove">
+    <div class="alert alert-warning">
+      <%= flash[:destroy_recommend] %>
+    </div>
+  </div>
+<% end %>
+</div>
+

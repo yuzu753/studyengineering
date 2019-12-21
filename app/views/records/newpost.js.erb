@@ -1,0 +1,8 @@
+$("#record_newpost").prepend("<%= j(render 'record', { record: @record }) %>")
+$("textarea").val('')
+$("input").val('')
+
+$(function(){
+	$(".remove").show()
+  setTimeout("$('.remove').fadeOut('slow')", 3000)
+})

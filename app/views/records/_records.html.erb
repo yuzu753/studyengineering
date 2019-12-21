@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-lg-12">
+      <div class="col-lg-8">
+        <h3>成果報告一覧</h3><br>
+      </div>
+      <div class="col-lg-4">
+        <% if flash[:add_record] %>
+          <div class="remove">
+            <div class="alert alert-success">
+              <%= flash[:add_record] %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <table class="table table-striped" style="table-layout:fixed;width:100%;">
+        <colgroup>
+          <col style="width:10%;">
+          <col style="width:15%;">
+          <col style="width:55%;">
+          <col style="width:10%;">
+          <col style="width:10%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>項目</th>
+            <th>詳細</th>
+            <th>学習時間<br>(合計学習時間)</th>
+            <th>その他</th>
+          </tr>
+        </thead>
+        <tbody id="record_newpost" style="word-wrap:break-word;">
+          <% records.each do |record| %>
+            <%= render partial: "record", locals: { record: record } %>
+          <% end %>
+        </tbody>
+      </table>
+    <div class="page_center">
+      <%= paginate records %>
+    </div>
+  </div>
+</div>
