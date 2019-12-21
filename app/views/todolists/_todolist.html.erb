@@ -1,0 +1,34 @@
+<tr>
+  <% if todolist.status == "challenge" %>
+    <th>
+      <h4><%= todolist.deadline.strftime("%Y-%m-%d") %></h4>
+    </th>
+    <th>
+      <h4><%= todolist.body %></h4>
+      <% if flash[:add_todo] %><div class="remove_newpost"><div class="alert alert-success"><%= flash[:add_todo] %></div></div><% end %>
+    </th>
+    <th>
+      <h4>
+      	期限まで後<%= current_user.ckeck_date(todolist) %>日
+      	<br><br>
+      	<%= link_to '達成！', todolist_congratulations_path(todolist), method: :patch, :class =>"btn btn-primary" %>
+      </h4>
+    </th>
+    <th>
+      <%= link_to "編集", edit_todolist_path(todolist.id), :class =>"btn btn-success" %>
+      <br><br>
+      <%= link_to "削除", todolist_path(todolist.id), method: :delete, remote: true, data: {confirm: 'Todoリストから削除しますか？'}, :class =>"btn btn-danger" %>
+    </th>
+  <% elsif todolist.status == "complete" %>
+    <th><h4><%= todolist.deadline.strftime("%Y-%m-%d") %></h4></th>
+    <th><h4><%= todolist.body %></h4></th>
+    <th><h4>達成</h4></th>
+    <th><h4 class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:blue;"></h4></th>
+  <% elsif todolist.status == "unachieved" %>
+    <th><h4><%= todolist.deadline.strftime("%Y-%m-%d") %></h4></th>
+    <th><h4><%= todolist.body %></h4></th>
+    <th><h5>未達</h5></th>
+    <th><h5 class="glyphicon glyphicon-warning-sign" aria-hidden="true"></h5></th>
+  <% else %>
+  <% end %>
+</tr>

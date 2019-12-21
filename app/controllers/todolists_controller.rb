@@ -3,6 +3,13 @@ class TodolistsController < ApplicationController
 	before_action :set_todolist, only: [:update, :destroy, :congratulations]
 
 	def index
+	  #未達時の更新用処理
+	  current_user.todolists.where(status: 0).each do |todo|
+	  	if current_user.ckeck_date(todo) < 0
+	  		todo.status = 2
+	  		todo.save
+	  	end
+	  end
 	  #TODOステータス別のソート機能
       if  params[:todo_status].to_i == 1
       	@todolists = current_user.todolists.where(status: 0).order(:deadline).page(params[:page]).per(10)
@@ -19,12 +26,6 @@ class TodolistsController < ApplicationController
 	  end
 
 	  @todolist = Todolist.new
-	  @todolists.each do |todo|
-	  	if current_user.ckeck_date(todo) < 0 && todo.status == "challenge"
-	  		todo.status = 2
-	  		todo.save
-	  	end
-	  end
 	  render :index
 	end
 
@@ -36,12 +37,11 @@ class TodolistsController < ApplicationController
 	end
 
 	def create
-	  @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
-	  todolist = Todolist.new(todolist_params)
-      todolist.user_id = current_user.id
-      if todolist.save
+	  @todolist = Todolist.new(todolist_params)
+      @todolist.user_id = current_user.id
+      if @todolist.save
         flash[:add_todo] = "リストに目標を追加しました"
-        render :index
+        render :newpost
       else
         flash[:miss_add_todo] = "やる事と期限を入力してください"
         render :message
@@ -59,12 +59,13 @@ class TodolistsController < ApplicationController
 	end
 
 	def destroy
-	  @todolists = current_user.todolists.where(status: 0).order(:deadline).page(params[:page]).per(10)
+	  @todolists = current_user.todolists.order("id DESC").page(params[:page]).per(10)
       @thetodolist.destroy
       flash[:destroy_todo] = "リストを削除しました"
       render :index
 	end
 
+	#達成報告用のメソッド
 	def congratulations
       @thetodolist.congratulations!
       flash[:success_update]  = "達成おめでとうございます!!"

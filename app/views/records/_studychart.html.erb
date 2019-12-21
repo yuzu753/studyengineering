@@ -6,7 +6,7 @@
     <% end %>
   </div>
   <p>時間(h)</p>
-  <%= line_chart @studychart %>
+  <%= line_chart @studychart, xtitle: "日付" %>
 <% else %>
   <h4>学習時間を記録しよう！</h4>
 <% end %>

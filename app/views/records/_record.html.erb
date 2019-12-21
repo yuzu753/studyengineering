@@ -1,0 +1,22 @@
+<tr>
+  <th>
+    <h5>
+      <%= link_to edit_record_path(record.id) do %>
+        <%= record.created_at.strftime("%Y-%m-%d") %>
+      <% end %>
+    </h5>
+  </th>
+  <th>
+    <h4><%= record.title %></h4>
+  </th>
+  <th>
+    <h4><%= record.body %></h4>
+  </th>
+  <th>
+    <h4><%= record.studytime %>時間</h4>
+    <h4>(<%= record.until_today_studytime %>時間)</h4>
+  </th>
+  <th>
+    <%= link_to "編集", edit_record_path(record.id), :class =>"btn btn-success" %>
+  </th>
+</tr>

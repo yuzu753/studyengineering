@@ -14,8 +14,7 @@ class UsersController < ApplicationController
 	  	  todo.save
 	  	end
 	  end
-	  todo_challenge = current_user.todolists.where(status: 0).order(:deadline)
-	  @todolists = todo_challenge.limit(5)
+	  @todolists = current_user.todolists.where(status: 0).order(:deadline).limit(5)
 
       #TODOの達成率のチャート用インスタンス変数
 	  @completes = current_user.todolists.where(status: 1)
@@ -53,7 +52,7 @@ class UsersController < ApplicationController
 
 	  @studychart = []
 	  @studytimes.each do |s|
-	    @studychart << [s.created_at.strftime("%Y-%m-%d"), s.until_today_studytime]
+	    @studychart << [s.created_at.strftime("%Y年%-m月%-d日") , s.until_today_studytime]
 	  end
 
 	end

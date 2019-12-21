@@ -12,9 +12,6 @@
 //
 //= require jquery3
 //= require rails-ujs
-//= require moment
-//= require fullcalendar
-//= require fullcalendar/locale-all
 
 //= popper
 //= require bootstrap-sprockets
@@ -24,10 +21,6 @@
 //= require Chart.bundle
 //= require data-confirm-modal
 
-//非同期時のフラッシュメッセージ再読み込み時に消すための機能
-$(function(){
-  setTimeout("$('.remove').hide()", 0)
-})
 
 //フラッシュメッセージのフェードアウト用の記述
 $(function(){

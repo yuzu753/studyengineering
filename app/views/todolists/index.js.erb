@@ -1,7 +1,6 @@
 $("#todolists_area").html("<%= j(render 'todolists', { todolists: @todolists }) %>")
-$("textarea").val('')
-$(".date").val('')
 
 $(function(){
+	$(".remove").show()
   setTimeout("$('.remove').fadeOut('slow')", 3000)
 })

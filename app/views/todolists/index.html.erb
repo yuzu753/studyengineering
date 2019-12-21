@@ -12,7 +12,7 @@
           <div class="new-todo-create"><%= t.submit 'リストに追加', class: "btn btn-warning", style: "width: 150px;" %></div>
         </div>
         <div id="todo_message_area" class="col-md-8">
-          <%= render partial: "message", locals: { todolists: @todolists } %>
+          <%= render partial: "message" %>
           <% if flash[:success_todo_update] %>
             <div class="fadeout">
               <div class="alert alert-success">

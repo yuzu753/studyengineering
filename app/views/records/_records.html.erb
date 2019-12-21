@@ -29,30 +29,9 @@
             <th>その他</th>
           </tr>
         </thead>
-        <tbody style="word-wrap:break-word;">
-          <% records.each do |re| %>
-            <tr>
-              <th>
-                <h5>
-                  <%= link_to edit_record_path(re.id) do %>
-                    <%= re.created_at.strftime("%Y-%m-%d") %>
-                  <% end %>
-                </h5>
-              </th>
-              <th>
-                <h4><%= re.title %></h4>
-              </th>
-              <th>
-                <h4><%= re.body %></h4>
-              </th>
-              <th>
-                <h4><%= re.studytime %>時間</h4>
-                <h4>(<%= re.until_today_studytime %>時間)</h4>
-              </th>
-              <th>
-                <%= link_to "編集", edit_record_path(re.id), :class =>"btn btn-success" %>
-              </th>
-            </tr>
+        <tbody id="record_newpost" style="word-wrap:break-word;">
+          <% records.each do |record| %>
+            <%= render partial: "record", locals: { record: record } %>
           <% end %>
         </tbody>
       </table>

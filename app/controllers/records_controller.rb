@@ -15,7 +15,6 @@ class RecordsController < ApplicationController
 	end
 
 	def create
-	  @records = current_user.records.order("id DESC").page(params[:page]).per(10)
 	  @record = Record.new(record_params)
       @record.user_id = current_user.id
 
@@ -27,8 +26,8 @@ class RecordsController < ApplicationController
           @record.save
           flash[:add_record] = "本日の進捗を追加しました"
           #Twitter投稿用の記述
-          @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
-          render :index
+          # @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
+          render :newpost
         else
           flash[:miss_add_record] = "学習項目と期限を入力してください"
           render :message
@@ -60,7 +59,7 @@ class RecordsController < ApplicationController
 		redirect_to records_path
 	  else
 	  	flash[:miss_recored_update]  = "項目を埋めて下さい"
-		redirect_to edit_record_path(@record.id)
+		render 'edit'
 	  end
 	end
 

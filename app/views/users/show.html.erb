@@ -123,8 +123,11 @@
 <div class="user-show container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3>興味のある本</h3>
+      <div onclick="obj=document.getElementById('menu1').style; obj.display=(obj.display=='none')?'block':'none';">
+        <h4>▼ 興味のある本(クリックで展開)</h4>
+      </div>
     </div>
+    <div id="menu1" style="display:none;clear:both;">
     <div class="panel-body">
       <% if current_user.bookshelves.present? %>
         <% @interest_books.each do |b| %>
@@ -150,41 +153,8 @@
       <% end %>
     </div>
   </div>
-</div>
-<div class="user-show container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3>学習済みの本</h3>
-    </div>
-    <div class="panel-body">
-      <% @read_books.each do |boo| %>
-        <div class="col-sm-2">
-          <div class="panel panel-default">
-            <div class="panel-heading usershow-book">
-              <%= link_to book_path(boo.book.id) do %>
-                <img src="<%= boo.book.small_image_url %>" alt="本の表紙", :image, style: "width: 150px; height: 150px;", fallback: "no_image.png" >
-              <% end %>
-            </div>
-            <ul class="usershow-book list-group">
-              <% if current_user.already_recommended?(boo.book) %>
-                <li class="recommend list-group-book">
-                  <%= link_to recommended_path(book_id: boo.book_id), method: :delete do %>
-                    <i class="glyphicon glyphicon-star" aria-hidden="true" style="color: gold;"></i>
-                     <i>お勧め済み</i>
-                  <% end %>
-                </li>
-              <% else %>
-                <li class="recommend list-group-book">
-                  <%= link_to recommendeds_path(book_id: boo.book_id), method: :post do %>
-                    <i class="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
-                    <i>お勧めする</i>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      <% end %>
-    </div>
   </div>
+</div>
+<div id="recommendeds_area" class="user-show container">
+  <%= render partial: "recommendeds/recommendeds", locals: { read_books: @read_books } %>
 </div>

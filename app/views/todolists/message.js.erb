@@ -1,5 +1,6 @@
-$("#todo_message_area").html("<%= j(render 'message', { todolists: @todolists }) %>")
+$("#todo_message_area").html("<%= j(render 'message') %>")
 
 $(function(){
-  setTimeout("$('.remove').fadeOut('slow')", 3000)
+	$(".remove_message").show()
+  setTimeout("$('.remove_message').fadeOut('slow')", 3000)
 })
