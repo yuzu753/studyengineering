@@ -49,7 +49,6 @@ test:
 #
 
 production:
-  <<: *default
   database: ENV['db_name']
   adapter: mysql2
   encoding: utf8mb4
