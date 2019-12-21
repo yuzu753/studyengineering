@@ -48,3 +48,13 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 
+production:
+  <<: *default
+  database: ENV['db_name']
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
+  host: rds-mysql-server.ce4aqgphm7ju.ap-northeast-1.rds.amazonaws.com
+  username: ENV['db_username']
+  password: ENV['db_password']
