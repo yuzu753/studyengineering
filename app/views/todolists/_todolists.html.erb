@@ -12,15 +12,18 @@
           </div>
         <% end %>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-8">
         <div class="form-group">
           <%= form_with(url: todolists_path, method: :get, class: "form-inline") do |f| %>
             <%= f.select :todo_status, [['ステータス別に表示', 0], ['挑戦中', 1], ['達成', 2], ['未達', 3], ['全てのリスト', 4]], { include_blank: true, selected: 0 }, {  class: "form-control" } %>
             <%= f.submit "表示を変更する", class: "btn btn-primary btn-mg", :id=>"notice" %>
           <% end %>
         </div>
-        <br>
       </div>
+      <div class="col-sm-3">
+        <%= button_to "達成、未達リストの一括削除", destroy_all_todolists_path, method: :delete, data: {confirm: '一括削除しますか？'}, class: "btn btn-danger pull-right" %>
+      </div>
+      <br>
   	  <table class="table table-hover" style="table-layout:fixed;width:100%;">
   	  	<colgroup>
   	  	  <col style="width:13%;">

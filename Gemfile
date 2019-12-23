@@ -79,6 +79,8 @@ gem 'rakuten_web_service'
 gem 'chartkick'
 gem 'font-awesome-rails'
 gem 'data-confirm-modal'
+gem "omniauth"
+gem 'omniauth-google-oauth2'
 
 
 

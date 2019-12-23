@@ -27,6 +27,13 @@
               </div>
             </div>
           <% end %>
+          <% if flash[:destroy_all] %>
+            <div class="fadeout">
+              <div class="alert alert-info">
+                <%= flash[:destroy_all] %>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
   	</div>

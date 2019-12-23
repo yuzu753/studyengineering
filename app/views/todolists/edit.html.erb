@@ -1,28 +1,30 @@
 <div class="todo-index contaiber">
-  <div class="row">
-  	<div class="col-md-8">
-  	  <h3>リストの編集</h3>
-      <%= form_with(model: @todolist, url: todolist_path(@todolist), local: true) do |t| %>
-        <label class="edit-todo-body" for="">やる事</label>
-        <%= t.text_area :body, class: 'form-control', style: "height: 100px;" %>
-        <label class="edit-todo-deadtime" for="">目標期限</label><br>
-        <%= t.date_field :deadline, min: Date.today %>
-        <br>
-        <div class="col-md-4">
-          <div class="edit-todo-create">
-            <%= t.submit '変更を確定する', class: "btn btn-warning", style: "width: 150px;" %>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <% if flash[:miss_todo_update] %>
-            <div class="fadeout">
-              <div class="alert alert-danger">
-                <%= flash[:miss_todo_update] %>
-              </div>
+  <div class="backimage">
+    <div class="row">
+    	<div class="col-md-8">
+    	  <h3>リストの編集</h3>
+        <%= form_with(model: @todolist, url: todolist_path(@todolist), local: true) do |t| %>
+          <label class="edit-todo-body" for="">やる事</label>
+          <%= t.text_area :body, class: 'form-control', style: "height: 100px;" %>
+          <label class="edit-todo-deadtime" for="">目標期限</label><br>
+          <%= t.date_field :deadline, min: Date.today %>
+          <br>
+          <div class="col-md-4">
+            <div class="edit-todo-create">
+              <%= t.submit '変更を確定する', class: "btn btn-warning", style: "width: 150px;" %>
             </div>
-          <% end %>
-        </div>
-      <% end %>
-  	</div>
+          </div>
+          <div class="col-md-8">
+            <% if flash[:miss_todo_update] %>
+              <div class="fadeout">
+                <div class="alert alert-danger">
+                  <%= flash[:miss_todo_update] %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+    	</div>
+    </div>
   </div>
 </div>
