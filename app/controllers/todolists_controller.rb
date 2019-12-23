@@ -65,6 +65,14 @@ class TodolistsController < ApplicationController
       render :index
 	end
 
+    #一括のメソッド
+	def destroy_all
+      current_user.todolists.where(status: 1).destroy_all
+      current_user.todolists.where(status: 2).destroy_all
+      flash[:destroy_all] = "達成、未達成のリストを全て削除しました"
+      redirect_back(fallback_location: root_path)
+	end
+
 	#達成報告用のメソッド
 	def congratulations
       @thetodolist.congratulations!

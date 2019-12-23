@@ -1,24 +1,103 @@
-# README
+# **README**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# **作品名**
+Study Engineering
 
-Things you may want to cover:
+# **ULR**
+https://studyengineering2019.com/
 
-* Ruby version
+# **コンセプト**
+プログラミング学習に特化した学習管理ツール。
+Twitterとの連動機能によって学習成果の共有が可能
 
-* System dependencies
+# **制作のきっかけ**
+・昨今プログラミングを学ぶ人たちが増えていることからプログラミング学習に特化したサービスがあってもいいのではないかと考えた
 
-* Configuration
+・また、自身がプログラミング学習を開始したときに「こんなツールがあったらいいなと」と思っていた機能を持ったサービスの開発をしたいと考え、学習記録の見える化やタスク管理、技術書の管理を一括で行えるツールとして本サービスを開発した
 
-* Database creation
+# **開発環境**
+言語: Ruby 2.5.7
 
-* Database initialization
+フレームワーク: Rails 5.2.4
 
-* How to run the test suite
+インフラ: Docker 3 / EC2(AWS)
 
-* Services (job queues, cache servers, search engines, etc.)
+DB: mysql:5.7
 
-* Deployment instructions
+バージョン管理: Git
 
-* ...
+# **重視した点**
+APIやDockerといった技術を貪欲に導入した
+
+・Dockerを用いた開発
+
+・楽天API
+
+・TwitterAPI
+
+・NotificationAPI
+
+・DBにMySQLを使用
+
+・お勧め（いいね）機能の実装
+
+・非同期機能により
+
+・チャート機能の実装
+
+・インフラにEC2（AWS）を採用
+
+・RSpecを用いてテストを記述
+
+# **実装した機能等の概要**
+ログイン機能
+Googleアカウントを用いたログイン機能
+
+ランキング機能（お勧め数、期間別学習時間）
+
+ヘッダー「Study Engineering」ログイン後の左ロゴ
+
+ ユーザーマイページ
+
+ ・達成報告前のTODOリストの確認、達成報告
+
+ ・TODOの達成未達率を円グラフで実装
+
+ ・線グラフを用いた学習時間の期間別表示機能
+
+ ・本棚に加えられた本のステータスの変更、削除機能
+
+ ・本のお勧め機能
+
+ ・非同期でのお勧め機能
+
+ヘッダー「技術書を加える」
+
+ 技術書のキーワード検索機能
+
+ 検索した技術書の一覧表示
+
+ 本の詳細情報の表示
+
+ヘッダー「TODOリストの追加」
+
+ TODOリストの追加と一覧の確認、達成報告、編集、削除、達成と未達のリストの一括削除機能
+
+ ステータス別（達成前、達成、未達）の表示機能
+
+ ブラウザの通知機能(ステータス切り替え時)
+
+ 非同期でリストに追加
+
+ヘッダー「学習記録をつける」
+
+ 学習記録の追加と一覧の確認、編集、Twitterとの連動投稿機能
+
+ 非同期でリストに追加
+
+ページネーション機能
+
+単体テスト、統合テスト(RSpecを使用)
+
+
+

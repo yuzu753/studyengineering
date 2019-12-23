@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'tops#top'
 
-  devise_for :users
+  devise_for :users, :controllers => {
+    :omniauth_callbacks =>  "users/omniauth_callbacks"
+  }
 
   resources :tops, only: [:top, :privacy]
   get 'tops/top', to: 'tops#top'
@@ -22,6 +24,9 @@ Rails.application.routes.draw do
 
   resources :todolists, only: [:index, :edit, :create, :update, :destroy] do
     patch :congratulations
+    collection do
+      delete 'destroy_all'
+    end
   end
 
   resources :records, only: [:index, :edit, :create, :update]

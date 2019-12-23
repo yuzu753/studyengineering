@@ -26,7 +26,7 @@ class RecordsController < ApplicationController
           @record.save
           flash[:add_record] = "本日の進捗を追加しました"
           #Twitter投稿用の記述
-          # @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
+          @client.update("タイトル：#{@record.title}\n内容：#{@record.body}\n学習時間：#{@record.studytime} h\n総計：#{@record.until_today_studytime} h")
           render :newpost
         else
           flash[:miss_add_record] = "学習項目と期限を入力してください"
