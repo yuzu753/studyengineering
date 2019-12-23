@@ -2,35 +2,35 @@
   <div class="signup-top">
     <div class="container">
       <div class="row">
-          <div class="col-md-offset-4 col-md-4 text-center">
-              <div class="form-login"></br>
-                  <h4 class="login-font">Sign up</h4>
-                  </br>
-                  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                    <%= f.label :name %>
-                    <%= f.text_field :name, autofocus: true, autocomplete: "name", :type => "text", :id => "email", :class => "form-control input-sm chat-input" %>
-                    </br>
-                    <%= f.label :email %><br />
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :type => "text", :id => "email", :class => "form-control input-sm chat-input" %>
-                    </br>
-                    <%= f.label :password %>
-                    <% if @minimum_password_length %><em>(<%= @minimum_password_length %> characters minimum)</em><% end %><br />
-                    <%= f.password_field :password, autocomplete: "new-password", :type => "password", :id => "email", :class => "form-control input-sm chat-input" %>
-                    </br>
-                    <%= f.label :password_confirmation %><br />
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password", :type => "password", :id => "email", :class => "form-control input-sm chat-input" %>
-                    </br>
-                    <div class="wrapper">
-                            <span class="group-btn">
-                              <%= f.submit "Sign up", :class => "btn btn-primary btn-md" %>
-                            </span>
-                    </div>
-                  <% end %>
-                  <br><br>
-                  <h4 class="login-font">他のアカウントからSign up</h4>
-                  <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %>
-              </div>
+        <div class="col-md-offset-4 col-md-4 text-center">
+          <div class="form-login"></br>
+            <h4 class="login-font">Sign up</h4>
+              </br>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= f.label :name %>
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", :type => "text", :id => "email", :class => "form-control input-sm chat-input" %>
+                </br>
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", :type => "text", :id => "email", :class => "form-control input-sm chat-input" %>
+                </br>
+                <%= f.label :password %>
+                <% if @minimum_password_length %><em>(<%= @minimum_password_length %> characters minimum)</em><% end %><br />
+                <%= f.password_field :password, autocomplete: "new-password", :type => "password", :id => "email", :class => "form-control input-sm chat-input" %>
+                </br>
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", :type => "password", :id => "email", :class => "form-control input-sm chat-input" %>
+                </br>
+                <div class="wrapper">
+                  <span class="group-btn">
+                    <%= f.submit "Sign up", :class => "btn btn-primary btn-md" %>
+                  </span>
+                </div>
+              <% end %>
+            <br><br>
+            <h4 class="login-font">他のアカウントからSign up</h4>
+            <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %>
           </div>
+        </div>
       </div>
     </div>
   </div>
